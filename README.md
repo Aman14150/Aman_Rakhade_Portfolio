@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Aman R. Rakhade Portfolio
 
-## Getting Started
+Personal portfolio website for Aman R. Rakhade, focused on AI engineering, full-stack product development, and applied software projects.
 
-First, run the development server:
+## Overview
+
+- Built with Next.js 16, React 19, TypeScript, and Tailwind CSS.
+- Designed as a premium dark-theme portfolio with motion, transitions, and resume-driven content.
+- Content is centralized so experience, projects, and profile details can be updated quickly.
+
+## Tech Stack
+
+- Next.js
+- React
+- TypeScript
+- Tailwind CSS
+- Framer Motion
+- Lucide React
+
+## Project Structure
+
+- `src/app` contains the App Router pages, layout, and global styles.
+- `src/components/portfolio-page.tsx` contains the main portfolio UI.
+- `src/data/portfolio.ts` contains profile, experience, projects, skills, and content data.
+- `public/Aman_Rakhade_Resume.pdf` is the downloadable resume used by the site.
+
+## Run Locally
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000` in the browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Production Checks
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run lint
+npm run build
+```
 
-## Learn More
+## Notes
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- The current AI Engineer company entry is still placeholder content until final details are added.
+- This repository is intended to be pushed to the personal portfolio GitHub repository after explicit confirmation.
