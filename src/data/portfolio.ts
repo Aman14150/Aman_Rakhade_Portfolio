@@ -1,18 +1,35 @@
+export type ProjectEntry = {
+  title: string;
+  subtitle: string;
+  period: string;
+  description: string;
+  problem: string;
+  solution: string;
+  impact: string;
+  stack: string[];
+  href?: string;
+};
+
 export const profile = {
   name: "Aman R. Rakhade",
-  title: "AI Engineer",
-  timeframe: "Nov 2025 - Present",
+  title: "Azure AI Engineer",
+  timeframe: "Available in 2026",
   location: "Nagpur, India",
+  portrait: "/Aman_Photo.jpeg",
   email: "amanrakhade14@gmail.com",
   phone: "+91 9637799513",
   linkedin: "https://www.linkedin.com/in/aman-rakhade-0a9488319",
   github: "https://github.com/Aman14150",
   resume: "/Aman_Rakhade_Resume.pdf",
+  signature:
+    "Azure AI Engineer building document workflows, retrieval systems, and product-grade web applications.",
+  availabilityStatus: "Open to Azure AI Engineer, Applied GenAI, and full-stack product roles.",
   heroSummary:
-    "I build AI-powered products that connect model capability with usable software, spanning retrieval systems, full-stack interfaces, backend services, and production-focused user experiences.",
+    "I build Azure AI products that turn document workflows, retrieval, and backend orchestration into reliable tools teams can actually use.",
   longSummary:
-    "With an Artificial Intelligence degree and hands-on product delivery experience across MERN, Spring Boot, Flask, and modern AI tooling, I focus on turning complex workflows into software that feels clear, fast, and reliable.",
-  availability: "Available for AI product engineering, full-stack builds, and intelligent workflow systems.",
+    "I work across AI services, APIs, and frontend systems to turn messy business workflows into software that is usable, reliable, and measurable in production.",
+  availability:
+    "Open to Azure AI, applied GenAI, and product-focused full-stack roles where model capability needs disciplined execution.",
 };
 
 export const navigation = [
@@ -24,46 +41,49 @@ export const navigation = [
 ];
 
 export const stats = [
-  { value: "Nov 2025", label: "AI engineer since" },
-  { value: "4", label: "featured product builds" },
+  { value: "Azure AI", label: "core focus" },
+  { value: "5", label: "shipped builds" },
   { value: "3", label: "industry internships" },
-  { value: "92%", label: "ML model accuracy" },
+  { value: "98%+", label: "resume extraction accuracy" },
 ];
 
 export const heroTags = [
-  "AI Systems",
-  "RAG Workflows",
-  "Full-Stack Delivery",
-  "Production UI",
+  "Azure AI",
+  "OpenAI & RAG",
+  "Document Intelligence",
+  "FastAPI APIs",
+  "Next.js UI",
+  "Agentic Workflows",
 ];
 
 export const focusAreas = [
   {
-    title: "LLM Product Engineering",
+    title: "Azure AI Delivery",
     description:
-      "Designing AI-first experiences that combine prompts, retrieval, speech, and product logic into dependable workflows.",
+      "Building solutions with Azure OpenAI, document intelligence, retrieval pipelines, and production-ready service integration.",
   },
   {
-    title: "Full-Stack Delivery",
+    title: "Backend to Frontend Ownership",
     description:
-      "Shipping interfaces, APIs, databases, and system integrations with an emphasis on maintainability and response speed.",
+      "Shipping APIs, orchestration logic, dashboards, and usable interfaces as one system instead of disconnected layers.",
   },
   {
-    title: "Practical Applied ML",
+    title: "Product-Focused Execution",
     description:
-      "Building prediction systems and model-assisted products that balance measurable accuracy with production usability.",
+      "Optimizing for recruiter, operator, and end-user clarity so AI features feel practical, not experimental.",
   },
 ];
 
 export const experiences = [
   {
-    company: "Current Role",
+    company: "MaSyCoDa Solutions Pvt. Ltd.",
     role: "AI Engineer",
     period: "Nov 2025 - Present",
     bullets: [
-      "Building AI-centric product workflows informed by hands-on work in RAG, GPT integrations, speech interfaces, and data-driven application design.",
-      "Bridging backend intelligence and frontend usability so model-powered features translate into professional software experiences.",
-      "Expanding from prototype-grade AI ideas into production-minded systems with stronger reliability, structure, and delivery discipline.",
+      "Designed Azure AI workflows for document processing with Azure OpenAI, Copilot, and Cognitive Services, reducing manual effort by 40%.",
+      "Built generative AI applications with advanced prompt engineering and NLP-based data extraction pipelines for unstructured documents, improving extraction accuracy.",
+      "Developed Agentic AI workflows and optimized LLM inference, reducing response latency by 25%.",
+      "Implemented scalable AI solutions on Microsoft Azure, translating business requirements into production-ready systems handling enterprise-scale workloads.",
     ],
   },
   {
@@ -71,9 +91,9 @@ export const experiences = [
     role: "Web Developer Intern",
     period: "Jul 2024 - Dec 2024",
     bullets: [
-      "Worked across MERN, PHP, SQL, and frontend technologies to deliver responsive web interfaces.",
-      "Improved page load time by 25% through interface optimization and cleaner implementation patterns.",
-      "Engineered REST APIs that improved data retrieval flow by 30% between frontend and backend systems.",
+      "Delivered responsive web applications using MERN, PHP, SQL, HTML, CSS, and JavaScript across client-facing modules.",
+      "Improved page load time by 25% through UI optimization and responsive design improvements.",
+      "Built and implemented REST APIs, streamlining data retrieval and reducing API response time by 30%.",
     ],
   },
   {
@@ -81,9 +101,9 @@ export const experiences = [
     role: "MERN Stack Developer Intern",
     period: "Jan 2024 - Apr 2024",
     bullets: [
-      "Built a solid full-stack foundation with MongoDB, Express.js, React.js, and Node.js.",
-      "Applied REST API design and CRUD workflows to support clean client-server integration.",
-      "Strengthened delivery across application structure, debugging, and feature implementation in the MERN ecosystem.",
+      "Built full-stack features using MongoDB, Express.js, React.js, and Node.js across CRUD workflows.",
+      "Applied REST API design principles to support clean client-server integration.",
+      "Strengthened delivery discipline across debugging, structure, and implementation quality.",
     ],
   },
   {
@@ -91,49 +111,79 @@ export const experiences = [
     role: "Frontend Developer Intern",
     period: "Sep 2023 - Oct 2023",
     bullets: [
-      "Built responsive interfaces using HTML, CSS, JavaScript, and Bootstrap.",
+      "Built responsive interfaces using HTML, CSS, JavaScript, and Bootstrap for user-facing web experiences.",
       "Improved user engagement by 20% through stronger layout and interaction quality.",
       "Reduced bounce rate by 30% with more usable, performance-aware frontend implementation.",
     ],
   },
 ];
 
-export const projects = [
+export const projects: ProjectEntry[] = [
+  {
+    title: "TalentMatchAI",
+    subtitle: "Azure AI resume screening platform",
+    period: "Jan 2026 - Feb 2026",
+    description:
+      "A recruiter workflow that turns unstructured resumes into ranked shortlists with clear scoring and faster review.",
+    problem:
+      "Recruiters were reviewing resumes manually across inconsistent formats, which slowed shortlisting and created noisy matches.",
+    solution:
+      "Built an Azure AI workflow with Document Intelligence, semantic matching, scoring, and recruiter-facing dashboards.",
+    impact: "98%+ extraction accuracy, ~90% improvement in candidate-job matching efficiency, and ~80% reduction in manual screening effort.",
+    stack: ["Python", "FastAPI", "React", "Azure OpenAI", "Document Intelligence", "Azure Web App"],
+    href: "https://talentmatchai-gugddpgsdfbcc8gr.centralindia-01.azurewebsites.net/",
+  },
   {
     title: "Yojna Chat",
-    subtitle: "AI-based Government Schemes Chatbot",
+    subtitle: "Multilingual government schemes assistant",
     period: "Feb 2025 - May 2025",
     description:
-      "A multilingual assistant for Indian government welfare schemes using RAG, live portal scraping, speech recognition, and text-to-speech for real-time access to public information.",
-    impact: "RAG pipeline with voice IO and live data retrieval",
+      "A public-information assistant built to make official scheme guidance easier to discover in text and voice.",
+    problem:
+      "Government scheme information was fragmented, hard to search, and less accessible for multilingual users.",
+    solution:
+      "Built a multilingual RAG assistant with live portal scraping, speech recognition, and text-to-speech.",
+    impact: "Delivered live scheme retrieval with voice and text responses sourced from official data.",
     stack: ["Python", "OpenAI GPT API", "QDrant", "Whisper", "TTS", "Crawl4AI"],
   },
   {
     title: "Diabetes Prediction System",
-    subtitle: "Flask ML Web Application",
+    subtitle: "ML prediction web application",
     period: "Oct 2025",
     description:
-      "A Flask-based prediction platform using Random Forest and patient health parameters, backed by MySQL and interactive dashboards for faster clinical-style assessment flows.",
-    impact: "92% model accuracy with 30% better prediction efficiency",
+      "A clinical-style prediction workflow combining model inference, dashboards, and stored patient data.",
+    problem:
+      "Prediction workflows for patient assessment needed to be faster and easier to use in a web environment.",
+    solution:
+      "Built a Flask application using Random Forest, MySQL-backed records, and an interactive prediction dashboard.",
+    impact: "Reached 92% model accuracy and improved prediction efficiency by 30%.",
     stack: ["Python", "Flask", "MySQL", "JavaScript", "HTML5", "CSS3"],
     href: "https://diabetes-prediction-system-tbty.onrender.com",
   },
   {
     title: "DoctorDoor",
-    subtitle: "Clinic Management System",
+    subtitle: "Clinic management system",
     period: "Aug 2025",
     description:
-      "A Spring Boot application for clinic operations with role-based access, dashboards, CRUD modules, and appointment management backed by optimized query and service-layer design.",
-    impact: "30% improvement in appointment tracking efficiency",
+      "An operational dashboard for clinic workflows with role-based access and appointment management.",
+    problem:
+      "Clinic operations needed cleaner appointment handling and stronger access control across staff workflows.",
+    solution:
+      "Built a Spring Boot system with role-based login, CRUD modules, dashboards, and optimized service-layer queries.",
+    impact: "Improved appointment tracking efficiency by 30%.",
     stack: ["Java", "Spring Boot", "Hibernate", "MySQL", "JavaScript"],
   },
   {
     title: "WorkHub Manager",
-    subtitle: "Task Management Dashboard",
+    subtitle: "Collaborative task dashboard",
     period: "Nov 2024 - Dec 2024",
     description:
-      "A collaborative MERN dashboard with role-based access, task tracking, authentication, and socket-driven chat for team workflow coordination.",
-    impact: "20% boost in team productivity",
+      "A team productivity dashboard built around tracking, collaboration, and secure access.",
+    problem:
+      "Teams needed a shared task workflow with clear ownership, chat, and role-based access.",
+    solution:
+      "Built a MERN dashboard with task management, authentication, role controls, and socket-based communication.",
+    impact: "Improved reported team productivity by 20%.",
     stack: ["React", "Node.js", "Express", "MongoDB", "Bootstrap"],
   },
 ];
@@ -143,14 +193,17 @@ export const skillGroups = [
     title: "AI and Data",
     items: [
       "Python",
+      "Azure OpenAI",
+      "Document Intelligence",
+      "Copilot",
+      "RAG",
+      "Agentic AI",
+      "Prompt Engineering",
       "TensorFlow",
       "PyTorch",
       "Scikit-learn",
       "NumPy",
       "Pandas",
-      "Matplotlib",
-      "RAG",
-      "Prompt Engineering",
       "Whisper",
     ],
   },
@@ -159,24 +212,27 @@ export const skillGroups = [
     items: [
       "React",
       "Next.js",
-      "JavaScript",
       "TypeScript",
-      "HTML",
-      "CSS",
+      "JavaScript",
       "Tailwind CSS",
-      "Bootstrap",
       "Responsive UI",
       "Interaction Design",
+      "Dashboard Design",
+      "HTML",
+      "CSS",
+      "Bootstrap",
     ],
   },
   {
     title: "Backend and Platforms",
     items: [
+      "FastAPI",
       "Node.js",
       "Express",
       "Spring Boot",
       "Flask",
       "REST APIs",
+      "Microsoft Azure",
       "MySQL",
       "MongoDB",
       "Git",
@@ -208,43 +264,43 @@ export const education = [
 ];
 
 export const highlights = [
-  "AI Engineer currently working across intelligent workflows and product systems.",
-  "Artificial Intelligence graduate with practical experience in web, backend, and ML delivery.",
-  "Comfortable moving from model experimentation to polished user-facing software.",
+  "Delivers Azure AI workflows that reduce manual review and improve operational speed.",
+  "Owns backend architecture, frontend delivery, and applied GenAI implementation end to end.",
+  "Best fit for teams that care more about measurable outcomes than demo polish.",
 ];
 
 export const currentFocus = [
   {
-    title: "AI Product Systems",
+    title: "Azure AI workflows",
     description:
-      "Building experiences where retrieval, prompting, backend orchestration, and interface clarity work as one product system.",
+      "Shipping document intelligence, retrieval, prompting, and orchestration into systems teams can operate.",
   },
   {
-    title: "Reliable Full-Stack Execution",
+    title: "Production interfaces",
     description:
-      "Turning ideas into maintainable applications with cleaner API design, predictable data flow, and presentable frontends.",
+      "Making AI features understandable through faster dashboards, cleaner states, and stronger UX decisions.",
   },
   {
-    title: "Practical Performance",
+    title: "Measured impact",
     description:
-      "Improving speed, usability, and structure so software feels professional in real usage rather than only in demos.",
+      "Prioritizing time saved, response quality, and workflow clarity over AI novelty alone.",
   },
 ];
 
 export const principles = [
   {
-    title: "Clarity over complexity",
+    title: "Clear over clever",
     description:
-      "I aim for systems that are understandable to maintain, explain, and extend rather than technically impressive but fragile.",
+      "I prefer systems that are easy to explain, maintain, and ship over solutions that are impressive but fragile.",
   },
   {
-    title: "Product thinking in engineering",
+    title: "Product before feature",
     description:
-      "The goal is not only shipping features, but ensuring they feel coherent, fast, and usable for the person on the other side.",
+      "Every AI workflow should feel useful in context, not just technically possible.",
   },
   {
-    title: "AI with software discipline",
+    title: "Systems thinking",
     description:
-      "Model capability matters, but the surrounding data flow, interfaces, and reliability are what make AI useful in practice.",
+      "Model quality matters, but APIs, reliability, UX, and deployment are what make it valuable in production.",
   },
 ];

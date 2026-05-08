@@ -17,23 +17,32 @@ const ibmPlexMono = IBM_Plex_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Aman R. Rakhade | AI Engineer",
+    default: "Aman R. Rakhade | Azure AI Engineer",
     template: "%s | Aman R. Rakhade",
   },
   description:
-    "Portfolio of Aman R. Rakhade, an AI Engineer building AI-powered products, intelligent workflows, and professional full-stack software experiences.",
+    "Portfolio of Aman R. Rakhade, an Azure AI Engineer building applied GenAI products, document workflows, and full-stack software experiences.",
+  keywords: [
+    "Aman R. Rakhade",
+    "Azure AI Engineer",
+    "Applied GenAI",
+    "Document Intelligence",
+    "RAG",
+    "Next.js",
+    "FastAPI",
+  ],
   openGraph: {
-    title: "Aman R. Rakhade | AI Engineer",
+    title: "Aman R. Rakhade | Azure AI Engineer",
     description:
-      "AI engineer portfolio featuring applied AI systems, full-stack product development, and high-impact project work.",
+      "Azure AI portfolio featuring applied GenAI systems, document workflows, and full-stack product delivery.",
     siteName: "Aman R. Rakhade Portfolio",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Aman R. Rakhade | AI Engineer",
+    title: "Aman R. Rakhade | Azure AI Engineer",
     description:
-      "AI engineer portfolio featuring applied AI systems, full-stack product development, and high-impact project work.",
+      "Azure AI portfolio featuring applied GenAI systems, document workflows, and full-stack product delivery.",
   },
 };
 
