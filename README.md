@@ -2,7 +2,7 @@
 
 Personal portfolio website for Aman R. Rakhade, focused on AI engineering, full-stack product development, and applied software projects.
 
-**Live:** https://aman14150.github.io/Personal_Portfolio/
+**Live:** https://aman14150.github.io/Aman_Rakhade_Portfolio/
 
 ## Overview
 
