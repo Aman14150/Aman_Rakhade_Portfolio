@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 
+const BASE = (process.env.NEXT_PUBLIC_BASE_PATH ?? "");
+
 import {
   ArrowRight,
   ArrowUpRight,
@@ -284,7 +286,7 @@ function ProfileCard({ compact = false }: { compact?: boolean }) {
             <div className="identity-avatar-wrap">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={`${profile.portrait}?v=2`}
+                src={`${BASE}${profile.portrait}?v=2`}
                 alt={profile.name}
                 width={320}
                 height={320}
@@ -330,7 +332,7 @@ function ProfileCard({ compact = false }: { compact?: boolean }) {
       </div>
 
       <div className={compact ? "identity-action-row flex-wrap" : "identity-action-row"}>
-        <a href={profile.resume} download className="identity-resume-button">
+        <a href={`${BASE}${profile.resume}`} download className="identity-resume-button">
           <Download className="h-4 w-4" />
           Resume
         </a>
