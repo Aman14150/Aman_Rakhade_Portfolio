@@ -13,6 +13,7 @@
   --accent-strong: #4f8cff;
   --accent-emerald: #34d399;
   --accent-warm: #ffb454;
+  --primary: #FF6B35;
   --panel-gradient: linear-gradient(180deg, rgba(12, 20, 37, 0.96), rgba(5, 9, 19, 0.96));
   --panel-glow: radial-gradient(circle at top right, rgba(110, 231, 255, 0.14), transparent 34%);
   --text-hero: clamp(3.2rem, 8vw, 5.75rem);
@@ -131,14 +132,8 @@ a {
   justify-content: center;
   gap: 1rem;
   margin-bottom: 1rem;
-  border: 1px solid rgba(148, 163, 184, 0.12);
   border-radius: 1.4rem;
-  background:
-    linear-gradient(180deg, rgba(7, 13, 26, 0.94), rgba(7, 13, 26, 0.84)),
-    radial-gradient(circle at top right, rgba(110, 231, 255, 0.12), transparent 40%);
-  backdrop-filter: blur(20px);
   padding: 0.95rem 1.1rem;
-  box-shadow: 0 18px 44px rgba(2, 6, 23, 0.22);
 }
 
 .site-header > * {
@@ -550,15 +545,15 @@ a {
   overflow-x: auto;
   scrollbar-width: none;
   border-radius: 1.5rem;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(148, 163, 184, 0.1);
+  background: rgba(7, 13, 26, 0.85);
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  backdrop-filter: blur(16px);
   padding: 0.35rem;
 }
 
 .section-nav::-webkit-scrollbar {
   display: none;
 }
-
 .section-nav-link,
 .mobile-dock-link {
   position: relative;
@@ -823,17 +818,17 @@ a {
 }
 
 .hero-primary-button {
-  border: 1px solid rgba(255, 255, 255, 0.9);
-  background: linear-gradient(180deg, #ffffff, #eef5fb);
-  color: #08111f;
-  box-shadow: 0 18px 36px rgba(2, 6, 23, 0.22);
+  border: 1px solid rgba(255, 107, 53, 0.7);
+  background: linear-gradient(135deg, #FF6B35, #e8521e);
+  color: #ffffff;
+  box-shadow: 0 18px 36px rgba(255, 107, 53, 0.22);
 }
 
 .hero-primary-button:hover {
   transform: translateY(-2px);
-  background: linear-gradient(180deg, #f8fdff, #dff7ff);
-  color: #04111d;
-  box-shadow: 0 22px 46px rgba(2, 6, 23, 0.28);
+  background: linear-gradient(135deg, #ff7c4a, #ff5a20);
+  color: #ffffff;
+  box-shadow: 0 22px 46px rgba(255, 107, 53, 0.32);
 }
 
 .hero-secondary-button {
@@ -867,9 +862,9 @@ a {
 }
 
 .hero-proof-card:hover {
-  border-color: rgba(110, 231, 255, 0.24);
-  background: rgba(255, 255, 255, 0.05);
-  box-shadow: 0 16px 40px rgba(2, 6, 23, 0.22);
+  border-color: rgba(255, 107, 53, 0.28);
+  background: linear-gradient(180deg, rgba(255, 107, 53, 0.06), rgba(255, 255, 255, 0.025));
+  box-shadow: 0 16px 40px rgba(255, 107, 53, 0.12);
 }
 
 .hero-proof-index {
@@ -1173,11 +1168,11 @@ a {
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
-  border: 1px solid rgba(110, 231, 255, 0.2);
+  border: 1px solid rgba(255, 107, 53, 0.28);
   border-radius: 9999px;
-  background: rgba(110, 231, 255, 0.08);
+  background: rgba(255, 107, 53, 0.08);
   padding: 0.9rem 1.1rem;
-  color: #d8e7f3;
+  color: #ffd5c2;
 }
 
 .project-story-grid {
@@ -1193,7 +1188,8 @@ a {
 }
 
 .project-story-card-impact {
-  background: linear-gradient(135deg, rgba(79, 140, 255, 0.12), rgba(110, 231, 255, 0.08));
+  background: linear-gradient(135deg, rgba(255, 107, 53, 0.12), rgba(255, 180, 84, 0.07));
+  border-color: rgba(255, 107, 53, 0.18);
 }
 
 .project-actions {
@@ -1237,8 +1233,9 @@ a {
   border-radius: 1.75rem;
   background:
     linear-gradient(145deg, rgba(11, 18, 33, 0.96), rgba(6, 9, 18, 0.94)),
-    radial-gradient(circle at top right, rgba(79, 140, 255, 0.12), transparent 28%),
+    radial-gradient(circle at top right, rgba(255, 107, 53, 0.14), transparent 28%),
     radial-gradient(circle at bottom left, rgba(255, 180, 84, 0.07), transparent 24%);
+  border-color: rgba(255, 107, 53, 0.18);
 }
 
 .project-card:hover {
