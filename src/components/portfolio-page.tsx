@@ -482,6 +482,11 @@ export function PortfolioPage() {
                       <h3 className="text-xl font-semibold text-white">{credential.title}</h3>
                       <p className="text-sm text-slate-300">{credential.issuer}</p>
                       <p className="project-period">{credential.type} · {credential.date}</p>
+                      {credential.href && (
+                        <a href={credential.href} target="_blank" rel="noreferrer" className="project-card-link" aria-label={`View credential: ${credential.title}`}>
+                          View credential<ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                        </a>
+                      )}
                     </motion.article>
                   ))}
                 </div>

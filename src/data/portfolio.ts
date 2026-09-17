@@ -21,7 +21,7 @@ export const profile = {
   github: "https://github.com/Aman14150",
   resume: "/Aman_Rakhade_Resume.pdf",
   heroSummary:
-    "I build AI-powered applications, automate document workflows, and develop voice assistants.",
+    "I build practical software solutions, choosing the right technologies for each problem.",
   availability: "For opportunities in AI engineering and full-stack development, get in touch.",
 };
 
@@ -247,5 +247,6 @@ export const certifications = [
     issuer: "Amazon Web Services",
     date: "July 2026",
     type: "Training badge",
+    href: "https://www.credly.com/badges/88deee95-6ece-4366-993b-41cba656385d",
   },
 ];
