@@ -42,3 +42,10 @@ next-env.d.ts
 
 # local source assets
 /Aman_Rakhadeai_Resume.pdf
+
+#claude folder setup
+.claude/
+# local agent settings and Python environment
+/.agents/
+/.codex/
+/.venv/
