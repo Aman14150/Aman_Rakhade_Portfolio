@@ -389,11 +389,11 @@ export function PortfolioPage() {
           </header>
           <main id="main-content" tabIndex={-1} className="content-body portfolio-main">
             <motion.section id="about" variants={stagger} initial="hidden" animate="show" className="narrative-shell hero-section anchor-section">
-              <div className="narrative-section space-y-6 p-6 sm:p-10">
-                <motion.div variants={fadeUp} className="space-y-5">
+              <div className="narrative-section space-y-5 p-6 sm:px-10 sm:py-8">
+                <motion.div variants={fadeUp} className="space-y-3">
                   <h1 className="hero-title">{profile.name}</h1>
                   <p className="text-xl font-medium text-orange-200">{profile.title}</p>
-                  <p className="hero-summary max-w-3xl text-slate-300">{profile.heroSummary}</p>
+                  <p className="hero-summary text-slate-300">{profile.heroSummary}</p>
                 </motion.div>
                 <motion.div variants={fadeUp} className="hero-actions">
                   <motion.a href="#projects" className="hero-primary-button" whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>

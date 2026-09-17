@@ -12,7 +12,7 @@ export type ProjectEntry = {
 
 export const profile = {
   name: "Aman R. Rakhade",
-  title: "AI Engineer",
+  title: "AI Engineer & Software Developer",
   location: "Nagpur, India",
   portrait: "/Aman_Photo.jpeg",
   email: "amanrakhade14@gmail.com",
@@ -21,7 +21,7 @@ export const profile = {
   github: "https://github.com/Aman14150",
   resume: "/Aman_Rakhade_Resume.pdf",
   heroSummary:
-    "I build AI applications, document automation, and voice assistants, from backend APIs to web interfaces.",
+    "I build AI-powered applications, automate document workflows, and develop voice assistants.",
   availability: "For opportunities in AI engineering and full-stack development, get in touch.",
 };
 
