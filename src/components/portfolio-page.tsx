@@ -8,6 +8,7 @@ import {
   ArrowRight,
   ArrowUpRight,
   BriefcaseBusiness,
+  Award,
   Cpu,
   Download,
   FolderGit2,
@@ -26,6 +27,7 @@ import {
   type Variants,
 } from "framer-motion";
 import {
+  certifications,
   experiences,
   navigation,
   profile,
@@ -441,6 +443,22 @@ export function PortfolioPage() {
                     <div className="flex flex-wrap gap-2.5">{group.items.map((item) => <span key={item} className="stack-chip">{item}</span>)}</div>
                   </motion.div>
                 ))}
+              </div>
+            </motion.section>
+
+            <motion.section id="certifications" variants={stagger} initial="hidden" whileInView="show" viewport={viewport} className="narrative-shell anchor-section" aria-labelledby="certifications-heading">
+              <div className="narrative-section space-y-8 p-6 sm:p-10">
+                <motion.h2 id="certifications-heading" variants={fadeUp} className="section-title text-white">Certifications &amp; Badges</motion.h2>
+                <div className="project-grid">
+                  {certifications.map((credential) => (
+                    <motion.article key={credential.title} variants={fadeUp} className="project-card">
+                      <Award className="h-6 w-6 text-orange-200" aria-hidden="true" />
+                      <h3 className="text-xl font-semibold text-white">{credential.title}</h3>
+                      <p className="text-sm text-slate-300">{credential.issuer}</p>
+                      <p className="project-period">{credential.type} · {credential.date}</p>
+                    </motion.article>
+                  ))}
+                </div>
               </div>
             </motion.section>
 

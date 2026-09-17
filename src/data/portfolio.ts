@@ -234,3 +234,18 @@ export const skillGroups = [
   },
   { title: "Cloud and Tools", items: ["Microsoft Azure", "Google Cloud", "AWS", "Git", "Postman", "VS Code"] },
 ];
+
+export const certifications = [
+  {
+    title: "Microsoft IQ Series: Foundry IQ",
+    issuer: "Global AI Community",
+    date: "May 2026",
+    type: "Badge",
+  },
+  {
+    title: "AWS SimuLearn - AI Practitioner",
+    issuer: "Amazon Web Services",
+    date: "July 2026",
+    type: "Training badge",
+  },
+];
