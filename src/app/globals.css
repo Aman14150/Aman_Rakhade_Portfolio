@@ -190,8 +190,9 @@ a {
   background: linear-gradient(160deg, #151821, #0a0a0f);
   color: #fff;
 }
-.profile-drawer[open] { animation: profile-enter 200ms ease-out; }
-.profile-drawer::backdrop { background: rgba(0, 0, 0, 0.65); backdrop-filter: blur(4px); }
+.profile-drawer:not([hidden]) { animation: profile-enter 200ms ease-out; }
+.profile-drawer[hidden] { display: none; }
+
 .profile-drawer-toolbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
 .profile-drawer-toolbar > span { font-size: 0.85rem; color: #b9c2d2; }
 .profile-close { width: 48px; padding: 0; }
@@ -1825,3 +1826,17 @@ a {
 .hero-actions { align-items: center; }
 
 @media (max-width: 639px) { .workflow-preview { flex-direction: column; align-items: stretch; } .workflow-preview svg { align-self: center; transform: rotate(90deg); } }
+
+/* A persistent, non-modal profile rail leaves the page interactive. */
+@media (min-width: 1100px) {
+  .profile-is-open { padding-left: 21rem; }
+  .profile-is-open .profile-drawer { width: 21rem; z-index: 40; }
+  .profile-is-open .site-header { left: 22rem; right: 1rem; max-width: none; }
+}
+@media (max-width: 1099px) {
+  .profile-drawer { position: relative; inset: auto; width: auto; height: auto; max-height: none; margin: 9rem 1rem 0; border: 1px solid rgba(255,255,255,.14); border-radius: 1rem; }
+  .profile-is-open .portfolio-layout { padding-top: 1.5rem; }
+  .profile-drawer .identity-avatar-wrap { width: 7rem; height: 7rem; }
+}
+
+@media (min-width: 1100px) and (max-width: 1250px) { .profile-is-open .site-header { display: grid; grid-template-columns: 1fr; gap: .4rem; padding: 0; } .profile-is-open .profile-toggle { justify-self: start; } .profile-is-open .header-nav-wrap { width: 100%; } .profile-is-open .portfolio-layout { padding-top: 10rem; } html:has(.profile-is-open) { scroll-padding-top: 10rem; } }

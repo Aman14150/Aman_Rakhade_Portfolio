@@ -278,7 +278,7 @@ function ProfileCard({ compact = false }: { compact?: boolean }) {
 export function PortfolioPage() {
   const [activeSection, setActiveSection] = useState("#about");
   const [profileOpen, setProfileOpen] = useState(false);
-  const profileDialog = useRef<HTMLDialogElement>(null);
+  const profileToggle = useRef<HTMLButtonElement>(null);
   const [copyStatus, setCopyStatus] = useState("");
   const [showMoreProjects, setShowMoreProjects] = useState(false);
   const [featuredProject, ...remainingProjects] = projects;
@@ -293,16 +293,15 @@ export function PortfolioPage() {
   }));
 
   useEffect(() => {
-    const dialog = profileDialog.current;
-    if (!dialog) return;
-    if (!profileOpen) {
-      if (dialog.open) dialog.close();
-      return;
-    }
-    dialog.showModal();
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => { document.body.style.overflow = previousOverflow; };
+    if (!profileOpen) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setProfileOpen(false);
+        profileToggle.current?.focus();
+      }
+    };
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
   }, [profileOpen]);
 
   useEffect(() => {
@@ -328,55 +327,33 @@ export function PortfolioPage() {
 
   return (
     <MotionConfig reducedMotion="user">
-      <div className="portfolio-scene">
+      <div className={`portfolio-scene ${profileOpen ? "profile-is-open" : ""}`}>
         <a href="#main-content" className="skip-link">Skip to content</a>
-        <dialog
-          ref={profileDialog}
+        <aside
           id="profile-sidebar"
           className="profile-drawer"
           aria-label="Profile and contact details"
-          onClose={() => setProfileOpen(false)}
-          onKeyDown={(event) => {
-            if (event.key !== "Tab") return;
-            const controls = event.currentTarget.querySelectorAll<HTMLElement>("a[href], button:not([disabled])");
-            const first = controls[0];
-            const last = controls[controls.length - 1];
-            if (event.shiftKey && document.activeElement === first) {
-              event.preventDefault();
-              last?.focus();
-            } else if (!event.shiftKey && document.activeElement === last) {
-              event.preventDefault();
-              first?.focus();
-            }
-          }}
-          onClick={(event) => {
-            if (event.target !== event.currentTarget) return;
-            const bounds = event.currentTarget.getBoundingClientRect();
-            if (event.clientX < bounds.left || event.clientX > bounds.right ||
-                event.clientY < bounds.top || event.clientY > bounds.bottom) {
-              setProfileOpen(false);
-            }
-          }}
+          hidden={!profileOpen}
         >
           <div className="profile-drawer-toolbar">
             <span>Profile</span>
-            <button type="button" onClick={() => setProfileOpen(false)} className="profile-close" aria-label="Close profile">
+            <button type="button" onClick={() => { setProfileOpen(false); profileToggle.current?.focus(); }} className="profile-close" aria-label="Close profile">
               <X size={20} aria-hidden="true" />
             </button>
           </div>
           <ProfileCard />
-        </dialog>
+        </aside>
 
         <div className="portfolio-layout mx-auto w-full max-w-[80rem] px-4 pb-16 pt-28 sm:px-6 lg:px-8 lg:pt-32">
           <header className="site-header">
             <button
               type="button"
               className="profile-toggle"
-              aria-label="Open profile"
+              ref={profileToggle}
+              aria-label={profileOpen ? "Close profile sidebar" : "Open profile"}
               aria-expanded={profileOpen}
               aria-controls="profile-sidebar"
-              aria-haspopup="dialog"
-              onClick={() => setProfileOpen(true)}
+              onClick={() => setProfileOpen(!profileOpen)}
             >
               <Menu size={20} aria-hidden="true" /><span>Profile</span>
             </button>
