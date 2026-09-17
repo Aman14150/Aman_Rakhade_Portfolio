@@ -1,0 +1,32 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Portfolio: Run and Debug",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "program": "${workspaceFolder}/node_modules/next/dist/bin/next",
+      "args": ["dev", "--webpack"],
+      "runtimeArgs": ["--inspect"],
+      "console": "integratedTerminal",
+      "outputCapture": "std",
+      "autoAttachChildProcesses": true,
+      "skipFiles": ["<node_internals>/**"],
+      "serverReadyAction": {
+        "action": "debugWithEdge",
+        "pattern": "Local:.*?(https?://localhost:[0-9]+)",
+        "uriFormat": "%s/Aman_Rakhade_Portfolio",
+        "webRoot": "${workspaceFolder}",
+        "killOnServerStop": true
+      }
+    },
+    {
+      "name": "Portfolio: Debug Already Running Site",
+      "type": "msedge",
+      "request": "launch",
+      "url": "http://localhost:3000/Aman_Rakhade_Portfolio",
+      "webRoot": "${workspaceFolder}"
+    }
+  ]
+}

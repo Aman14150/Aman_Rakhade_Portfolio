@@ -1,0 +1,7 @@
+{
+  "rewrites": [
+    { "source": "/Aman_Rakhade_Portfolio", "destination": "/index.html" },
+    { "source": "/Aman_Rakhade_Portfolio/_next/static/:directory/:file", "destination": "/_next/static/:directory/:file" },
+    { "source": "/Aman_Rakhade_Portfolio/:file", "destination": "/:file" }
+  ]
+}

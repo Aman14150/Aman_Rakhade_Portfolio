@@ -33,7 +33,24 @@ npm install
 npm run dev
 ```
 
-Open `http://localhost:3000` in the browser.
+Open `http://localhost:3000/Aman_Rakhade_Portfolio` in the browser.
+
+## One-click Run and Debug in VS Code
+
+Install dependencies once with `npm install`, then open **Run and Debug**
+(`Ctrl+Shift+D`), select **Portfolio: Run and Debug**, and press **F5** or the
+green play button. This starts Next.js with Webpack and opens the portfolio in
+Microsoft Edge with browser and Node.js debugging enabled. Save changes to
+refresh the page automatically. Set breakpoints in your TypeScript/TSX files
+to pause execution; press **Shift+F5** to stop the debug session.
+
+If `npm run dev` is already running, select **Portfolio: Debug Already Running
+Site** to debug the browser at port 3000, or stop the existing server with
+`Ctrl+C` before using the full-project configuration. Next.js allows only one
+development server per project output directory.
+
+Edit `src/data/portfolio.ts` for content, `src/components/portfolio-page.tsx`
+for layout and interactions, and `src/app/globals.css` for styling.
 
 ## Production Checks
 
@@ -44,5 +61,5 @@ npm run build
 
 ## Notes
 
-- The current AI Engineer company entry is still placeholder content until final details are added.
+- Portfolio content includes MaSyCoDa, internships, and AI projects. Update confirmed dates and outcomes in `src/data/portfolio.ts`.
 - This repository is intended to be pushed to the personal portfolio GitHub repository after explicit confirmation.
