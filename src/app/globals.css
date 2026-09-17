@@ -1840,3 +1840,15 @@ a {
 }
 
 @media (min-width: 1100px) and (max-width: 1250px) { .profile-is-open .site-header { display: grid; grid-template-columns: 1fr; gap: .4rem; padding: 0; } .profile-is-open .profile-toggle { justify-self: start; } .profile-is-open .header-nav-wrap { width: 100%; } .profile-is-open .portfolio-layout { padding-top: 10rem; } html:has(.profile-is-open) { scroll-padding-top: 10rem; } }
+
+/* Follow the reader down each entry without leaving its timeline row. */
+#experience.narrative-shell { overflow: clip; }
+.journey-center { align-items: flex-start; }
+.journey-badge { position: sticky; top: 45vh; flex-shrink: 0; }
+@media (min-width: 1280px) {
+  .journey-row > * { grid-row: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .journey-badge { position: relative; top: auto; }
+  .journey-center { align-items: center; }
+}
