@@ -241,12 +241,29 @@ export const certifications = [
     issuer: "Global AI Community",
     date: "May 2026",
     type: "Badge",
+    href: "https://globalai.community/badges/306ac6fa-4526-4a37-a727-5e64553d1aac",
   },
   {
     title: "AWS SimuLearn - AI Practitioner",
     issuer: "Amazon Web Services",
     date: "July 2026",
     type: "Training badge",
-    href: "https://www.credly.com/badges/88deee95-6ece-4366-993b-41cba656385d",
+    href: "https://www.credly.com/badges/88deee95-6ece-4366-993b-41cba656385d/public_url",
+  },
+  {
+    title: "Automate Data Capture at Scale with Document AI",
+    issuer: "Google Cloud",
+    date: "August 2026",
+    type: "Skill badge",
+    href: "https://www.credly.com/badges/2f89c735-46db-49d4-b7d4-2c2a188ec193",
+  },
+  {
+    title: "Develop Serverless Applications on Cloud Run",
+    issuer: "Google Cloud",
+    date: "September 2026",
+    type: "Skill badge",
+    href: "https://www.credly.com/badges/ad6d2568-2b26-41a3-a08c-d6438ca5d10c",
   },
 ];
+
+export const badgeCollectionUrl = "https://www.credly.com/users/aman-rakhade";

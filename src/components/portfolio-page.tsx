@@ -27,6 +27,7 @@ import {
   type Variants,
 } from "framer-motion";
 import {
+  badgeCollectionUrl,
   certifications,
   experiences,
   navigation,
@@ -490,6 +491,7 @@ export function PortfolioPage() {
                     </motion.article>
                   ))}
                 </div>
+                <a href={badgeCollectionUrl} target="_blank" rel="noreferrer" className="hero-secondary-button">View all badges on Credly<ArrowUpRight className="h-4 w-4" aria-hidden="true" /></a>
               </div>
             </motion.section>
 
