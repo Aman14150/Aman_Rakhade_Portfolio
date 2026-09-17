@@ -466,7 +466,7 @@ export function PortfolioPage() {
                 <motion.h2 variants={fadeUp} className="section-title text-white">Skills</motion.h2>
                 {skillGroups.map((group) => (
                   <motion.div key={group.title} variants={fadeUp} className="skill-band">
-                    <h3 className="skill-band-title">{group.title}</h3>
+                    <div><h3 className="skill-band-title">{group.title}</h3>{group.note && <p className="mt-2 text-xs leading-5 text-slate-400">{group.note}</p>}</div>
                     <div className="flex flex-wrap gap-2.5">{group.items.map((item) => <span key={item} className="stack-chip">{item}</span>)}</div>
                   </motion.div>
                 ))}
@@ -479,7 +479,10 @@ export function PortfolioPage() {
                 <div className="project-grid">
                   {certifications.map((credential) => (
                     <motion.article key={credential.title} variants={fadeUp} className="project-card">
-                      <Award className="h-6 w-6 text-orange-200" aria-hidden="true" />
+                      {credential.image ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img src={`${BASE}${credential.image}`} alt={`${credential.title} badge`} width={112} height={112} loading="lazy" decoding="async" className="h-28 w-28 object-contain" />
+                      ) : <Award className="h-6 w-6 text-orange-200" aria-hidden="true" />}
                       <h3 className="text-xl font-semibold text-white">{credential.title}</h3>
                       <p className="text-sm text-slate-300">{credential.issuer}</p>
                       <p className="project-period">{credential.type} · {credential.date}</p>

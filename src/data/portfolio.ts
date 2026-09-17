@@ -233,12 +233,23 @@ export const skillGroups = [
     ],
   },
   { title: "Cloud and Tools", items: ["Microsoft Azure", "Google Cloud", "AWS", "Git", "Postman", "VS Code"] },
+  {
+    title: "Google Cloud",
+    note: "Hands-on skill badges",
+    items: ["Vertex AI", "Gemini API", "Document AI", "BigQuery ML", "Cloud Run", "Cloud Storage", "Pub/Sub", "IAM", "Google Kubernetes Engine", "CI/CD"],
+  },
+  {
+    title: "AWS",
+    note: "Hands-on SimuLearn training",
+    items: ["Amazon Bedrock", "Amazon SageMaker", "Amazon Q", "Bedrock Guardrails", "RAG knowledge bases"],
+  },
 ];
 
 export const certifications = [
   {
     title: "Microsoft IQ Series: Foundry IQ",
     issuer: "Global AI Community",
+    image: "/badge-foundry-iq.png",
     date: "May 2026",
     type: "Badge",
     href: "https://globalai.community/badges/306ac6fa-4526-4a37-a727-5e64553d1aac",
@@ -246,6 +257,7 @@ export const certifications = [
   {
     title: "AWS SimuLearn - AI Practitioner",
     issuer: "Amazon Web Services",
+    image: "/badge-aws-ai-practitioner.png",
     date: "July 2026",
     type: "Training badge",
     href: "https://www.credly.com/badges/88deee95-6ece-4366-993b-41cba656385d/public_url",
