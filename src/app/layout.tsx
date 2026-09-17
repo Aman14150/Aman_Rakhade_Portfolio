@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Mono, Manrope } from "next/font/google";
+import { IBM_Plex_Mono, Inter } from "next/font/google";
 import "./globals.css";
 
-const manrope = Manrope({
-  variable: "--font-manrope",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
   display: "swap",
 });
@@ -15,20 +15,19 @@ const ibmPlexMono = IBM_Plex_Mono({
   display: "swap",
 });
 
-// TODO: Update SITE_URL to your production domain before deploying
-const SITE_URL = "https://amanrakhade.dev";
+const SITE_URL = "https://aman14150.github.io/Aman_Rakhade_Portfolio/";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Aman R. Rakhade | Azure AI Engineer",
+    default: "Aman R. Rakhade | AI Engineer",
     template: "%s | Aman R. Rakhade",
   },
   description:
-    "Portfolio of Aman R. Rakhade, an Azure AI Engineer building applied GenAI products, document workflows, and full-stack software experiences.",
+    "Portfolio of Aman R. Rakhade, an AI Engineer building AI applications, document automation, voice assistants, and web interfaces.",
   keywords: [
     "Aman R. Rakhade",
-    "Azure AI Engineer",
+    "AI Engineer",
     "Applied GenAI",
     "Document Intelligence",
     "RAG",
@@ -36,12 +35,12 @@ export const metadata: Metadata = {
     "FastAPI",
   ],
   alternates: {
-    canonical: "/",
+    canonical: SITE_URL,
   },
   openGraph: {
-    title: "Aman R. Rakhade | Azure AI Engineer",
+    title: "Aman R. Rakhade | AI Engineer",
     description:
-      "Azure AI portfolio featuring applied GenAI systems, document workflows, and full-stack product delivery.",
+      "AI engineering portfolio featuring document automation, voice assistants, and full-stack applications.",
     siteName: "Aman R. Rakhade Portfolio",
     url: SITE_URL,
     type: "website",
@@ -49,9 +48,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Aman R. Rakhade | Azure AI Engineer",
+    title: "Aman R. Rakhade | AI Engineer",
     description:
-      "Azure AI portfolio featuring applied GenAI systems, document workflows, and full-stack product delivery.",
+      "AI engineering portfolio featuring document automation, voice assistants, and full-stack applications.",
   },
 };
 
@@ -59,7 +58,7 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Aman R. Rakhade",
-  jobTitle: "Azure AI Engineer",
+  jobTitle: "AI Engineer",
   url: SITE_URL,
   email: "amanrakhade14@gmail.com",
   address: {
@@ -81,7 +80,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${manrope.variable} ${ibmPlexMono.variable} h-full scroll-smooth antialiased`}
+      className={`${inter.variable} ${ibmPlexMono.variable} h-full scroll-smooth antialiased`}
       suppressHydrationWarning
     >
       <head>

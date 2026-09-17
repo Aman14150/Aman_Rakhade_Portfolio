@@ -12,8 +12,7 @@ export type ProjectEntry = {
 
 export const profile = {
   name: "Aman R. Rakhade",
-  title: "Azure AI Engineer",
-  timeframe: "Available in 2026",
+  title: "AI Engineer",
   location: "Nagpur, India",
   portrait: "/Aman_Photo.jpeg",
   email: "amanrakhade14@gmail.com",
@@ -21,57 +20,17 @@ export const profile = {
   linkedin: "https://www.linkedin.com/in/aman-rakhade-0a9488319",
   github: "https://github.com/Aman14150",
   resume: "/Aman_Rakhade_Resume.pdf",
-  signature:
-    "Azure AI Engineer building document workflows, retrieval systems, and product-grade web applications.",
-  availabilityStatus: "Open to Azure AI Engineer, Applied GenAI, and full-stack product roles.",
   heroSummary:
-    "I build Azure AI products that turn document workflows, retrieval, and backend orchestration into reliable tools teams can actually use.",
-  longSummary:
-    "I work across AI services, APIs, and frontend systems to turn messy business workflows into software that is usable, reliable, and measurable in production.",
-  availability:
-    "Open to Azure AI, applied GenAI, and product-focused full-stack roles where model capability needs disciplined execution.",
+    "I build AI applications, document automation, and voice assistants, from backend APIs to web interfaces.",
+  availability: "For opportunities in AI engineering and full-stack development, get in touch.",
 };
 
 export const navigation = [
   { label: "About", href: "#about" },
-  { label: "Experience", href: "#experience" },
   { label: "Projects", href: "#projects" },
+  { label: "Experience", href: "#experience" },
   { label: "Skills", href: "#skills" },
   { label: "Contact", href: "#contact" },
-];
-
-export const stats = [
-  { value: "Azure AI", label: "core focus" },
-  { value: "5", label: "shipped builds" },
-  { value: "3", label: "industry internships" },
-  { value: "98%+", label: "resume extraction accuracy" },
-];
-
-export const heroTags = [
-  "Azure AI",
-  "OpenAI & RAG",
-  "Document Intelligence",
-  "FastAPI APIs",
-  "Next.js UI",
-  "Agentic Workflows",
-];
-
-export const focusAreas = [
-  {
-    title: "Azure AI Delivery",
-    description:
-      "Building solutions with Azure OpenAI, document intelligence, retrieval pipelines, and production-ready service integration.",
-  },
-  {
-    title: "Backend to Frontend Ownership",
-    description:
-      "Shipping APIs, orchestration logic, dashboards, and usable interfaces as one system instead of disconnected layers.",
-  },
-  {
-    title: "Product-Focused Execution",
-    description:
-      "Optimizing for recruiter, operator, and end-user clarity so AI features feel practical, not experimental.",
-  },
 ];
 
 export const experiences = [
@@ -80,10 +39,9 @@ export const experiences = [
     role: "AI Engineer",
     period: "Nov 2025 - Present",
     bullets: [
-      "Designed Azure AI workflows for document processing with Azure OpenAI, Copilot, and Cognitive Services, reducing manual effort by 40%.",
-      "Built generative AI applications with advanced prompt engineering and NLP-based data extraction pipelines for unstructured documents, improving extraction accuracy.",
-      "Developed Agentic AI workflows and optimized LLM inference, reducing response latency by 25%.",
-      "Implemented scalable AI solutions on Microsoft Azure, translating business requirements into production-ready systems handling enterprise-scale workloads.",
+      "Build AI applications for recruitment and healthcare, including resume screening, claims analysis, and clinical document processing.",
+      "Develop Python APIs and automated workflows to extract information, match records, and route documents for review, with validation and error handling.",
+      "Work on multilingual voice assistance for hospital enquiries and appointments, connecting AI services with business systems and user interfaces.",
     ],
   },
   {
@@ -103,7 +61,6 @@ export const experiences = [
     bullets: [
       "Built full-stack features using MongoDB, Express.js, React.js, and Node.js across CRUD workflows.",
       "Applied REST API design principles to support clean client-server integration.",
-      "Strengthened delivery discipline across debugging, structure, and implementation quality.",
     ],
   },
   {
@@ -121,17 +78,56 @@ export const experiences = [
 export const projects: ProjectEntry[] = [
   {
     title: "TalentMatchAI",
-    subtitle: "Azure AI resume screening platform",
-    period: "Jan 2026 - Feb 2026",
+    subtitle: "AI resume screening platform",
+    period: "Dec 2025 - Present",
     description:
       "A recruiter workflow that turns unstructured resumes into ranked shortlists with clear scoring and faster review.",
     problem:
-      "Recruiters were reviewing resumes manually across inconsistent formats, which slowed shortlisting and created noisy matches.",
+      "Resumes arrived in different formats, making manual comparison slow and inconsistent.",
     solution:
-      "Built an Azure AI workflow with Document Intelligence, semantic matching, scoring, and recruiter-facing dashboards.",
-    impact: "98%+ extraction accuracy, ~90% improvement in candidate-job matching efficiency, and ~80% reduction in manual screening effort.",
+      "Extracted resume text, matched skills and experience to job requirements, and showed reviewers a 100-point score with a clear breakdown.",
+    impact: "Reduced manual screening effort by approximately 80%, with a transparent 100-point scoring model.",
     stack: ["Python", "FastAPI", "React", "Azure OpenAI", "Document Intelligence", "Azure Web App"],
-    href: "https://talentmatchai-gugddpgsdfbcc8gr.centralindia-01.azurewebsites.net/",
+    // The previous public demo returns HTTP 403; direct visitors to Contact.
+  },
+  {
+    title: "Cognitive Claims Intelligence",
+    subtitle: "AI analysis for claims, policies, and financial documents",
+    period: "Dec 2025 - Jun 2026",
+    description:
+      "A searchable claims workspace connecting policy information, claim decisions, and financial summaries.",
+    problem:
+      "Fragmented claims, policy, and financial records required extensive manual investigation and made decisions difficult to explain.",
+    solution:
+      "Combined claim, policy, and financial records into a searchable workspace so teams could check eligibility, understand decisions, and prepare payment summaries.",
+    impact: "The solution reports 99.8% model accuracy and standardized outputs for reporting and reconciliation.",
+    stack: ["SharePoint", "Azure Document Intelligence", "Synapse", "Data Lake", "Microsoft Fabric", "Azure AI Search", "Azure OpenAI"],
+  },
+  {
+    title: "AI Fax Processing Integration",
+    subtitle: "Clinical fax intake and NextGen workflow integration",
+    period: "Feb 2026 - Present",
+    description:
+      "An automated clinical fax workflow for classification, extraction, patient matching, and task routing.",
+    problem:
+      "Manual fax review and inconsistent patient information slowed routing and increased the risk of incomplete records.",
+    solution:
+      "Classified incoming faxes, extracted patient details, matched existing records, and created NextGen tasks. Incomplete or unclear documents were sent to staff for review.",
+    impact: "Reported solution accuracy improved from 90.3% to 93.4%; accuracy above 95% remains an enhancement target.",
+    stack: ["Azure AI Content Understanding", "Logic Apps", "Azure Functions", "OneLake", "SQL Server", "NextGen EMR"],
+  },
+  {
+    title: "MediAssist: Intelligent Hospital Receptionist",
+    subtitle: "Multilingual patient support through voice and chat",
+    period: "2026",
+    description:
+      "A hospital assistant for patient enquiries, doctor discovery, appointments, and department routing.",
+    problem:
+      "Routine patient calls occupied reception teams and contributed to missed calls and longer wait times.",
+    solution:
+      "Designed voice and chat support for hospital questions, doctor availability, and appointment booking or changes, with handoff to staff when needed.",
+    impact: "The solution reports a 60-70% reduction in routine interactions and supports 24/7 patient assistance.",
+    stack: ["ElevenLabs", "RAG", "Azure Functions", "Azure Table Storage", "Microsoft Graph", "Microsoft 365 Calendar"],
   },
   {
     title: "Yojna Chat",
@@ -158,7 +154,7 @@ export const projects: ProjectEntry[] = [
       "Built a Flask application using Random Forest, MySQL-backed records, and an interactive prediction dashboard.",
     impact: "Reached 92% model accuracy and improved prediction efficiency by 30%.",
     stack: ["Python", "Flask", "MySQL", "JavaScript", "HTML5", "CSS3"],
-    href: "https://diabetes-prediction-system-tbty.onrender.com",
+    // Public demo timed out during review; use the contact action until reliable.
   },
   {
     title: "DoctorDoor",
@@ -224,7 +220,7 @@ export const skillGroups = [
     ],
   },
   {
-    title: "Backend and Platforms",
+    title: "Backend and Databases",
     items: [
       "FastAPI",
       "Node.js",
@@ -232,75 +228,9 @@ export const skillGroups = [
       "Spring Boot",
       "Flask",
       "REST APIs",
-      "Microsoft Azure",
       "MySQL",
       "MongoDB",
-      "Git",
-      "Postman",
-      "VS Code",
     ],
   },
-];
-
-export const education = [
-  {
-    institution: "G H Raisoni College of Engineering and Management, Nagpur",
-    detail: "B.Tech in Artificial Intelligence",
-    period: "2025",
-    meta: "CGPA 7.9/10",
-  },
-  {
-    institution: "Shri Vidyavati Deodia High School Or College, Nagpur",
-    detail: "HSC, Science",
-    period: "2021",
-    meta: "85.67%",
-  },
-  {
-    institution: "Bhonsala Military School, Nagpur",
-    detail: "SSC, Science",
-    period: "2019",
-    meta: "82.20%",
-  },
-];
-
-export const highlights = [
-  "Delivers Azure AI workflows that reduce manual review and improve operational speed.",
-  "Owns backend architecture, frontend delivery, and applied GenAI implementation end to end.",
-  "Best fit for teams that care more about measurable outcomes than demo polish.",
-];
-
-export const currentFocus = [
-  {
-    title: "Azure AI workflows",
-    description:
-      "Shipping document intelligence, retrieval, prompting, and orchestration into systems teams can operate.",
-  },
-  {
-    title: "Production interfaces",
-    description:
-      "Making AI features understandable through faster dashboards, cleaner states, and stronger UX decisions.",
-  },
-  {
-    title: "Measured impact",
-    description:
-      "Prioritizing time saved, response quality, and workflow clarity over AI novelty alone.",
-  },
-];
-
-export const principles = [
-  {
-    title: "Clear over clever",
-    description:
-      "I prefer systems that are easy to explain, maintain, and ship over solutions that are impressive but fragile.",
-  },
-  {
-    title: "Product before feature",
-    description:
-      "Every AI workflow should feel useful in context, not just technically possible.",
-  },
-  {
-    title: "Systems thinking",
-    description:
-      "Model quality matters, but APIs, reliability, UX, and deployment are what make it valuable in production.",
-  },
+  { title: "Cloud and Tools", items: ["Microsoft Azure", "Google Cloud", "AWS", "Git", "Postman", "VS Code"] },
 ];
