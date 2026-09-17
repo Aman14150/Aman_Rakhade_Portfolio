@@ -307,23 +307,49 @@ export function PortfolioPage() {
   }, [profileOpen]);
 
   useEffect(() => {
-    const sections = navigation
-      .map((item) => document.getElementById(item.href.slice(1)))
-      .filter((section): section is HTMLElement => section instanceof HTMLElement);
+    const sections = Array.from(document.querySelectorAll<HTMLElement>("main > section[id]"));
     if (!sections.length) return;
+    let frame = 0;
     const updateActiveSection = () => {
-      const headerBottom = document.querySelector("header")?.getBoundingClientRect().bottom ?? 80;
-      const atBottom = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 4;
-      const currentSection = [...sections].reverse()
-        .find((section) => section.getBoundingClientRect().top <= headerBottom + 64) ?? sections[0];
+      frame = 0;
+      const headerBottom = document.querySelector("header")?.getBoundingClientRect().bottom ?? 0;
+      const viewportBottom = window.innerHeight;
+      const atBottom = window.scrollY + viewportBottom >= document.documentElement.scrollHeight - 4;
+      let currentSection = sections[0];
+      let largestVisibleHeight = -1;
+      for (const section of sections) {
+        const rect = section.getBoundingClientRect();
+        const visibleHeight = Math.max(0, Math.min(rect.bottom, viewportBottom) - Math.max(rect.top, headerBottom));
+        if (visibleHeight > largestVisibleHeight) {
+          largestVisibleHeight = visibleHeight;
+          currentSection = section;
+        }
+      }
+      // Keep a heading aligned beneath the sticky header selected after an anchor jump.
+      const alignedSection = sections.find((section) => {
+        const top = section.getBoundingClientRect().top;
+        return Math.abs(top - headerBottom) <= 32;
+      });
+      if (alignedSection) currentSection = alignedSection;
+      if (window.scrollY <= 4) currentSection = sections[0];
+      // Unlisted sections (such as certifications) deliberately clear the nav highlight.
       setActiveSection(`#${atBottom ? sections[sections.length - 1].id : currentSection.id}`);
     };
+    const scheduleUpdate = () => {
+      if (!frame) frame = window.requestAnimationFrame(updateActiveSection);
+    };
     updateActiveSection();
-    window.addEventListener("scroll", updateActiveSection, { passive: true });
-    window.addEventListener("resize", updateActiveSection);
+    const observer = new ResizeObserver(scheduleUpdate);
+    sections.forEach((section) => observer.observe(section));
+    const header = document.querySelector("header");
+    if (header) observer.observe(header);
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
     return () => {
-      window.removeEventListener("scroll", updateActiveSection);
-      window.removeEventListener("resize", updateActiveSection);
+      observer.disconnect();
+      window.cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
     };
   }, []);
 
