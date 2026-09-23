@@ -458,6 +458,7 @@ export function PortfolioPage() {
         </aside>
 
         <div className="portfolio-layout mx-auto w-full max-w-[80rem] px-4 pb-16 pt-28 sm:px-6 lg:px-8 lg:pt-32">
+          <div className="header-backdrop" aria-hidden="true" />
           <header className="site-header">
             <button
               type="button"
