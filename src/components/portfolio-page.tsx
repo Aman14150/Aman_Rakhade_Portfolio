@@ -334,7 +334,11 @@ export function PortfolioPage() {
       if (alignedSection) currentSection = alignedSection;
       if (window.scrollY <= 4) currentSection = sections[0];
       // Unlisted sections (such as certifications) deliberately clear the nav highlight.
-      setActiveSection(`#${atBottom ? sections[sections.length - 1].id : currentSection.id}`);
+      const sectionHash = `#${atBottom ? sections[sections.length - 1].id : currentSection.id}`;
+      setActiveSection(sectionHash);
+      if (window.location.hash !== sectionHash) {
+        window.history.replaceState(window.history.state, "", sectionHash);
+      }
     };
     const scheduleUpdate = () => {
       if (!frame) frame = window.requestAnimationFrame(updateActiveSection);
