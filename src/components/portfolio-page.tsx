@@ -58,6 +58,31 @@ function GitHubIcon({ className }: { className?: string }) {
   );
 }
 
+function HeroIllustration() {
+  return (
+    <div className="hero-illustration" aria-hidden="true">
+      <div className="hero-illustration-top"><span className="hero-illustration-mark" /><span>From input to insight</span><span className="hero-illustration-dots">•••</span></div>
+      <div className="hero-illustration-canvas">
+        <div className="hero-illustration-source">
+          <span className="hero-illustration-caption">01 / INPUT</span>
+          <span className="hero-illustration-line hero-illustration-line-long" />
+          <span className="hero-illustration-line" />
+          <span className="hero-illustration-line hero-illustration-line-short" />
+          <span className="hero-illustration-source-icon"><FolderGit2 size={19} /></span>
+        </div>
+        <div className="hero-illustration-route"><span /><span /><span /></div>
+        <div className="hero-illustration-result">
+          <span className="hero-illustration-caption">02 / OUTPUT</span>
+          <span className="hero-illustration-result-icon"><Sparkles size={20} /></span>
+          <span className="hero-illustration-result-title">Clear decisions</span>
+          <span className="hero-illustration-result-line" />
+        </div>
+      </div>
+      <div className="hero-illustration-footer"><span>Thoughtful engineering</span><span>↗</span></div>
+    </div>
+  );
+}
+
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 16 },
   show: {
@@ -280,6 +305,7 @@ function ProfileCard({ compact = false }: { compact?: boolean }) {
 
 export function PortfolioPage() {
   const [activeSection, setActiveSection] = useState("#about");
+  const [scrollProgress, setScrollProgress] = useState(0);
   const [profileOpen, setProfileOpen] = useState(false);
   const profileToggle = useRef<HTMLButtonElement>(null);
   const [copyStatus, setCopyStatus] = useState("");
@@ -316,6 +342,8 @@ export function PortfolioPage() {
       const headerBottom = document.querySelector("header")?.getBoundingClientRect().bottom ?? 0;
       const viewportBottom = window.innerHeight;
       const atBottom = window.scrollY + viewportBottom >= document.documentElement.scrollHeight - 4;
+      const scrollable = document.documentElement.scrollHeight - viewportBottom;
+      setScrollProgress(scrollable > 0 ? Math.min(100, Math.max(0, (window.scrollY / scrollable) * 100)) : 0);
       let currentSection = sections[0];
       let largestVisibleHeight = -1;
       for (const section of sections) {
@@ -391,23 +419,30 @@ export function PortfolioPage() {
               <Menu size={20} aria-hidden="true" /><span>Profile</span>
             </button>
             <div className="header-nav-wrap"><SectionNavigation activeSection={activeSection} /></div>
+            <span className="site-scroll-progress" style={{ width: `${scrollProgress}%` }} aria-hidden="true" />
           </header>
           <main id="main-content" tabIndex={-1} className="content-body portfolio-main">
             <motion.section id="about" variants={stagger} initial="hidden" animate="show" className="narrative-shell hero-section anchor-section">
-              <div className="narrative-section space-y-5 p-6 sm:px-10 sm:py-8">
-                <motion.div variants={fadeUp} className="space-y-3">
-                  <h1 className="hero-title">{profile.name}</h1>
-                  <p className="text-xl font-medium text-orange-200">{profile.title}</p>
-                  <p className="hero-summary text-slate-300">{profile.heroSummary}</p>
-                </motion.div>
-                <motion.div variants={fadeUp} className="hero-actions">
-                  <motion.a href="#projects" className="hero-primary-button" whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
-                    View projects<ArrowRight className="h-4 w-4" />
-                  </motion.a>
-                  <a href={`${BASE}${profile.resume}`} download className="hero-secondary-button"><Download className="h-4 w-4" />Resume (PDF)</a>
-                  <a href={profile.github} target="_blank" rel="noreferrer" className="identity-social-link" aria-label="GitHub profile"><GitHubIcon className="h-5 w-5" /></a>
-                  <a href={profile.linkedin} target="_blank" rel="noreferrer" className="identity-social-link" aria-label="LinkedIn profile"><LinkedinIcon className="h-5 w-5" /></a>
-                </motion.div>
+              <div className="narrative-section hero-layout">
+                <div className="hero-copy">
+                  <motion.div variants={fadeUp} className="space-y-3">
+                    <p className="hero-eyebrow">Portfolio / Aman Rakhade</p>
+                    <h1 className="hero-title">{profile.name}</h1>
+                    <p className="hero-role">{profile.title}</p>
+                    <p className="hero-summary text-slate-300">{profile.heroSummary}</p>
+                  </motion.div>
+                  <motion.div variants={fadeUp} className="hero-actions">
+                    <motion.a href="#projects" className="hero-primary-button" whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
+                      View projects<ArrowRight className="h-4 w-4" />
+                    </motion.a>
+                    <a href={`${BASE}${profile.resume}`} download className="hero-secondary-button"><Download className="h-4 w-4" />Resume (PDF)</a>
+                    <span className="hero-social-pair">
+                      <a href={profile.github} target="_blank" rel="noreferrer" className="identity-social-link" aria-label="GitHub profile"><GitHubIcon className="h-5 w-5" /></a>
+                      <a href={profile.linkedin} target="_blank" rel="noreferrer" className="identity-social-link" aria-label="LinkedIn profile"><LinkedinIcon className="h-5 w-5" /></a>
+                    </span>
+                  </motion.div>
+                </div>
+                <motion.div variants={fadeUp} className="hero-art"><HeroIllustration /></motion.div>
               </div>
             </motion.section>
 
@@ -420,11 +455,15 @@ export function PortfolioPage() {
                     <h3 className="text-3xl font-semibold tracking-tight text-white">{featuredProject.title}</h3>
                     <p className="project-period">{featuredProject.subtitle} · {featuredProject.period}</p>
                     <p className="project-summary text-slate-300">{featuredProject.description}</p>
-                    <div className="project-story-grid">
-                      <div className="project-story-card"><p className="project-flow-label">Problem</p><p className="project-flow-value">{featuredProject.problem}</p></div>
-                      <div className="project-story-card"><p className="project-flow-label">What I built</p><p className="project-flow-value">{featuredProject.solution}</p></div>
-                      <div className="project-story-card project-story-card-impact"><p className="project-flow-label">Result</p><p className="project-flow-value">{featuredProject.impact}</p></div>
-                    </div>
+                    <p className="project-outcome">{featuredProject.impact}</p>
+                    <details className="project-details">
+                      <summary>Explore project<span className="sr-only">: {featuredProject.title}</span></summary>
+                      <div className="project-story-grid project-card-story">
+                        <div className="project-story-card"><p className="project-flow-label">Problem</p><p className="project-flow-value">{featuredProject.problem}</p></div>
+                        <div className="project-story-card"><p className="project-flow-label">What I built</p><p className="project-flow-value">{featuredProject.solution}</p></div>
+                        <div className="project-story-card project-story-card-impact"><p className="project-flow-label">Result</p><p className="project-flow-value">{featuredProject.impact}</p></div>
+                      </div>
+                    </details>
                   </div>
                   <div className="flex flex-wrap gap-2">{featuredProject.stack.map((item) => <span key={item} className="stack-chip">{item}</span>)}</div>
                   <a href="#contact" className="project-card-link">Discuss this project<ArrowUpRight className="h-4 w-4" /></a>
@@ -440,7 +479,7 @@ export function PortfolioPage() {
                       <p className="text-sm leading-7 text-slate-300">{project.description}</p>
                       <p className="project-outcome">{project.impact}</p>
                       <details className="project-details">
-                        <summary>How it works<span className="sr-only">: {project.title}</span></summary>
+                        <summary>Explore project<span className="sr-only">: {project.title}</span></summary>
                         <div className="project-card-story">
                           <div><p className="project-flow-label">Problem</p><p className="project-flow-value">{project.problem}</p></div>
                           <div><p className="project-flow-label">What I built</p><p className="project-flow-value">{project.solution}</p></div>
