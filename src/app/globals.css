@@ -80,8 +80,8 @@ a {
 }
 
 :is(a, button, summary):focus-visible {
-  outline: 3px solid #ffb092;
-  outline-offset: 4px;
+  outline: 2px solid #c9d5e4;
+  outline-offset: 2px;
 }
 
 .skip-link {
@@ -171,8 +171,8 @@ a {
   transition: background-color 180ms ease, border-color 180ms ease;
 }
 .profile-toggle:hover, .profile-close:hover {
-  border-color: var(--accent);
-  background: #25202a;
+  border-color: rgba(255, 255, 255, 0.3);
+  background: #1c202b;
 }
 .profile-drawer {
   position: fixed;

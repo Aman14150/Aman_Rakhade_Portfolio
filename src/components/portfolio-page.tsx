@@ -450,7 +450,7 @@ export function PortfolioPage() {
         >
           <div className="profile-drawer-toolbar">
             <span>Profile</span>
-            <button type="button" onClick={() => { setProfileOpen(false); profileToggle.current?.focus(); }} className="profile-close" aria-label="Close profile">
+            <button type="button" onClick={(event) => { setProfileOpen(false); if (event.detail === 0) profileToggle.current?.focus(); }} className="profile-close" aria-label="Close profile">
               <X size={20} aria-hidden="true" />
             </button>
           </div>
@@ -466,7 +466,7 @@ export function PortfolioPage() {
               aria-label={profileOpen ? "Close profile sidebar" : "Open profile"}
               aria-expanded={profileOpen}
               aria-controls="profile-sidebar"
-              onClick={() => setProfileOpen(!profileOpen)}
+              onClick={(event) => { setProfileOpen(!profileOpen); if (event.detail > 0) event.currentTarget.blur(); }}
             >
               <Menu size={20} aria-hidden="true" /><span>Profile</span>
             </button>
