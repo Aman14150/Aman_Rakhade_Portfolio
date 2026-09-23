@@ -12,8 +12,11 @@ import {
   Cpu,
   Download,
   FolderGit2,
+  FileText,
   Mail,
   Menu,
+  ScanLine,
+  Search,
   X,
   MapPin,
   Phone,
@@ -83,6 +86,46 @@ function HeroIllustration() {
   );
 }
 
+function ProjectVisual({ variant }: { variant: "talent" | "claims" | "fax" }) {
+  if (variant === "talent") {
+    return (
+      <div className="project-visual project-visual-talent" role="img" aria-label="Illustration of resumes and job requirements becoming an explained shortlist">
+        <div className="project-visual-top"><span className="project-visual-light" /> Screening workspace <span>01 / 03</span></div>
+        <div className="project-visual-stage project-visual-talent-stage">
+          <div className="visual-document-stack"><div className="visual-document visual-document-back"><FileText size={18} /><i /><i /></div><div className="visual-document visual-document-front"><UserRound size={18} /><i /><i /><i /></div></div>
+          <div className="visual-flow-line"><span /><span /><span /></div>
+          <div className="visual-result-panel"><small>Match insights</small><div className="visual-result-row"><b /><span><i /><i /></span><em>✓</em></div><div className="visual-result-row"><b /><span><i /><i /></span><em>✓</em></div><div className="visual-result-row"><b /><span><i /><i /></span><em>✓</em></div></div>
+        </div>
+        <div className="project-visual-bottom"><span>Extract</span><span>Compare</span><span>Explain</span></div>
+      </div>
+    );
+  }
+  if (variant === "claims") {
+    return (
+      <div className="project-visual project-visual-claims" role="img" aria-label="Illustration of linked claims and policy records producing a grounded summary">
+        <div className="project-visual-top"><span className="project-visual-light" /> Claims workspace <span>02 / 03</span></div>
+        <div className="project-visual-stage project-visual-claims-stage">
+          <div className="visual-records"><span><FileText size={15} /> Claim</span><span><FileText size={15} /> Policy</span><span><FileText size={15} /> Finance</span></div>
+          <div className="visual-search-node"><Search size={19} /></div>
+          <div className="visual-summary-panel"><small>Grounded summary</small><i /><i /><i /><div><span>Source 01</span><span>Source 02</span></div></div>
+        </div>
+        <div className="project-visual-bottom"><span>Connect</span><span>Retrieve</span><span>Summarize</span></div>
+      </div>
+    );
+  }
+  return (
+    <div className="project-visual project-visual-fax" role="img" aria-label="Illustration of a clinical fax moving through extraction and staff review">
+      <div className="project-visual-top"><span className="project-visual-light" /> Clinical intake <span>03 / 03</span></div>
+      <div className="project-visual-stage project-visual-fax-stage">
+        <div className="visual-fax-sheet"><ScanLine size={22} /><i /><i /><i /><small>Incoming fax</small></div>
+        <div className="visual-fax-connector"><span /><span /><span /></div>
+        <div className="visual-review-panel"><small>Review queue</small><span><b /> Classified</span><span><b /> Fields extracted</span><span><b /> Patient check</span></div>
+      </div>
+      <div className="project-visual-bottom"><span>Classify</span><span>Match</span><span>Route</span></div>
+    </div>
+  );
+}
+
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 16 },
   show: {
@@ -112,6 +155,14 @@ const navIcons: Record<string, LucideIcon> = {
   "#projects": FolderGit2,
   "#skills": Cpu,
   "#contact": Mail,
+};
+
+const compactNavLabels: Record<string, string> = {
+  "#about": "About",
+  "#projects": "Projects",
+  "#experience": "Work",
+  "#skills": "Skills",
+  "#contact": "Contact",
 };
 
 type JourneyItem = {
@@ -144,6 +195,7 @@ function SectionNavigation({
           <motion.a
             key={item.href}
             href={item.href}
+            aria-label={item.label}
             aria-current={isActive ? "location" : undefined}
             onClick={onNavigate}
             whileTap={{ scale: 0.97 }}
@@ -161,7 +213,7 @@ function SectionNavigation({
               <span className={isMobile ? "mobile-menu-icon" : "section-nav-icon"}>
                 <Icon className="h-4 w-4" />
               </span>
-              {isMobile ? <span className="mobile-menu-label">{item.label}</span> : <span>{item.label}</span>}
+              {isMobile ? <span className="mobile-menu-label">{item.label}</span> : <span><span className="nav-label-full">{item.label}</span><span className="nav-label-compact" aria-hidden="true">{compactNavLabels[item.href]}</span></span>}
             </span>
           </motion.a>
         );
@@ -422,7 +474,7 @@ export function PortfolioPage() {
             <span className="site-scroll-progress" style={{ width: `${scrollProgress}%` }} aria-hidden="true" />
           </header>
           <main id="main-content" tabIndex={-1} className="content-body portfolio-main">
-            <motion.section id="about" variants={stagger} initial="hidden" animate="show" className="narrative-shell hero-section anchor-section">
+            <motion.section id="about" variants={stagger} initial={false} animate="show" className="narrative-shell hero-section anchor-section">
               <div className="narrative-section hero-layout">
                 <div className="hero-copy">
                   <motion.div variants={fadeUp} className="space-y-3">
@@ -450,7 +502,7 @@ export function PortfolioPage() {
               <div className="narrative-section space-y-8 p-6 sm:p-10">
                 <motion.h2 variants={fadeUp} className="section-title text-white">Projects</motion.h2>
                 <motion.article variants={fadeUp} className="project-card project-card-featured">
-                  <div className="workflow-preview" aria-label="Resume screening workflow"><span>Resume + job description</span><ArrowRight aria-hidden="true" size={18} /><span>Extract + match</span><ArrowRight aria-hidden="true" size={18} /><span>Ranked shortlist</span></div>
+                  <ProjectVisual variant="talent" />
                   <div className="space-y-5">
                     <h3 className="text-3xl font-semibold tracking-tight text-white">{featuredProject.title}</h3>
                     <p className="project-period">{featuredProject.subtitle} · {featuredProject.period}</p>
@@ -471,7 +523,7 @@ export function PortfolioPage() {
                 <motion.div variants={stagger} className="project-grid">
                   {otherProjects.map((project, index) => (
                     <motion.article key={project.title} variants={fadeUp} initial={false} animate="show" className={`project-card group ${projectRowAccents[index % projectRowAccents.length]}`}>
-                      {index < 2 && <div className="workflow-preview" aria-label={`${project.title} workflow`}>{(index === 0 ? ["Claims + policies", "Search + analyse", "Grounded summaries"] : ["Incoming fax", "Extract + match", "NextGen + staff review"]).map((step) => <span key={step}>{step}</span>)}</div>}
+                      {index < 2 && <ProjectVisual variant={index === 0 ? "claims" : "fax"} />}
                       <div className="space-y-2">
                         <h3 className="text-2xl font-semibold tracking-tight text-white">{project.title}</h3>
                         <p className="project-period">{project.period}</p>
