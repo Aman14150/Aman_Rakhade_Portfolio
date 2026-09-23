@@ -98,9 +98,18 @@ function ProjectVisual({ variant }: { variant: "talent" | "claims" | "fax" }) {
       <div className="project-visual project-visual-talent" role="img" aria-label="Illustration of resumes and job requirements becoming an explained shortlist">
         <div className="project-visual-top"><span className="project-visual-light" /> Screening workspace</div>
         <div className="project-visual-stage project-visual-talent-stage">
-          <div className="visual-document-stack"><div className="visual-document visual-document-back"><FileText size={18} /><i /><i /></div><div className="visual-document visual-document-front"><UserRound size={18} /><i /><i /><i /></div></div>
+          <div className="visual-talent-inputs">
+            <div className="visual-talent-heading"><span>Source inputs</span><em>OCR + normalize</em></div>
+            <div className="visual-talent-input-row"><UserRound size={17} /><span><strong>Candidate resumes</strong><small>Skills and experience</small></span></div>
+            <div className="visual-talent-input-row"><FileText size={17} /><span><strong>Job description</strong><small>Role requirements</small></span></div>
+          </div>
           <div className="visual-flow-line"><span /><span /><span /></div>
-          <div className="visual-result-panel"><small>Match insights</small><div className="visual-result-row"><b /><span><i /><i /></span><em>✓</em></div><div className="visual-result-row"><b /><span><i /><i /></span><em>✓</em></div><div className="visual-result-row"><b /><span><i /><i /></span><em>✓</em></div></div>
+          <div className="visual-talent-shortlist">
+            <div className="visual-talent-heading"><span>Ranked shortlist</span><em>For review</em></div>
+            <div className="visual-talent-match"><span className="visual-talent-avatar">A</span><span><strong>Profile A</strong><small>Skills aligned</small></span><span className="visual-talent-check">✓</span></div>
+            <div className="visual-talent-match"><span className="visual-talent-avatar">B</span><span><strong>Profile B</strong><small>Relevant experience</small></span><span className="visual-talent-check">✓</span></div>
+            <div className="visual-talent-explain"><Sparkles size={13} /> Explainable matches</div>
+          </div>
         </div>
         <div className="project-visual-bottom"><span>Extract</span><span>Compare</span><span>Explain</span></div>
       </div>
