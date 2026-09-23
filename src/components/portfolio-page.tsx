@@ -10,6 +10,7 @@ import {
   BriefcaseBusiness,
   Award,
   Cpu,
+  Database,
   Download,
   FolderGit2,
   FileText,
@@ -68,10 +69,15 @@ function HeroIllustration() {
       <div className="hero-illustration-canvas">
         <div className="hero-illustration-source">
           <span className="hero-illustration-caption">01 / INPUT</span>
-          <span className="hero-illustration-line hero-illustration-line-long" />
-          <span className="hero-illustration-line" />
-          <span className="hero-illustration-line hero-illustration-line-short" />
-          <span className="hero-illustration-source-icon"><FolderGit2 size={19} /></span>
+          <div className="hero-illustration-source-heading">
+            <span className="hero-illustration-source-icon"><FolderGit2 size={19} /></span>
+            <strong className="hero-illustration-source-label-full">Source data</strong>
+            <strong className="hero-illustration-source-label-compact">Inputs</strong>
+          </div>
+          <div className="hero-illustration-source-items">
+            <span><FileText size={14} /> Documents <i /></span>
+            <span><Database size={14} /> Data records <i /></span>
+          </div>
         </div>
         <div className="hero-illustration-route"><span /><span /><span /></div>
         <div className="hero-illustration-result">
@@ -90,7 +96,7 @@ function ProjectVisual({ variant }: { variant: "talent" | "claims" | "fax" }) {
   if (variant === "talent") {
     return (
       <div className="project-visual project-visual-talent" role="img" aria-label="Illustration of resumes and job requirements becoming an explained shortlist">
-        <div className="project-visual-top"><span className="project-visual-light" /> Screening workspace <span>01 / 03</span></div>
+        <div className="project-visual-top"><span className="project-visual-light" /> Screening workspace</div>
         <div className="project-visual-stage project-visual-talent-stage">
           <div className="visual-document-stack"><div className="visual-document visual-document-back"><FileText size={18} /><i /><i /></div><div className="visual-document visual-document-front"><UserRound size={18} /><i /><i /><i /></div></div>
           <div className="visual-flow-line"><span /><span /><span /></div>
@@ -103,7 +109,7 @@ function ProjectVisual({ variant }: { variant: "talent" | "claims" | "fax" }) {
   if (variant === "claims") {
     return (
       <div className="project-visual project-visual-claims" role="img" aria-label="Illustration of linked claims and policy records producing a grounded summary">
-        <div className="project-visual-top"><span className="project-visual-light" /> Claims workspace <span>02 / 03</span></div>
+        <div className="project-visual-top"><span className="project-visual-light" /> Claims workspace</div>
         <div className="project-visual-stage project-visual-claims-stage">
           <div className="visual-records"><span><FileText size={15} /> Claim</span><span><FileText size={15} /> Policy</span><span><FileText size={15} /> Finance</span></div>
           <div className="visual-search-node"><Search size={19} /></div>
@@ -115,7 +121,7 @@ function ProjectVisual({ variant }: { variant: "talent" | "claims" | "fax" }) {
   }
   return (
     <div className="project-visual project-visual-fax" role="img" aria-label="Illustration of a clinical fax moving through extraction and staff review">
-      <div className="project-visual-top"><span className="project-visual-light" /> Clinical intake <span>03 / 03</span></div>
+      <div className="project-visual-top"><span className="project-visual-light" /> Clinical intake</div>
       <div className="project-visual-stage project-visual-fax-stage">
         <div className="visual-fax-sheet"><ScanLine size={22} /><i /><i /><i /><small>Incoming fax</small></div>
         <div className="visual-fax-connector"><span /><span /><span /></div>
@@ -357,7 +363,7 @@ function ProfileCard({ compact = false }: { compact?: boolean }) {
 
 export function PortfolioPage() {
   const [activeSection, setActiveSection] = useState("#about");
-  const [scrollProgress, setScrollProgress] = useState(0);
+  const scrollProgressRef = useRef<HTMLSpanElement>(null);
   const [profileOpen, setProfileOpen] = useState(false);
   const profileToggle = useRef<HTMLButtonElement>(null);
   const [copyStatus, setCopyStatus] = useState("");
@@ -395,7 +401,8 @@ export function PortfolioPage() {
       const viewportBottom = window.innerHeight;
       const atBottom = window.scrollY + viewportBottom >= document.documentElement.scrollHeight - 4;
       const scrollable = document.documentElement.scrollHeight - viewportBottom;
-      setScrollProgress(scrollable > 0 ? Math.min(100, Math.max(0, (window.scrollY / scrollable) * 100)) : 0);
+      const progress = scrollable > 0 ? Math.min(1, Math.max(0, window.scrollY / scrollable)) : 0;
+      if (scrollProgressRef.current) scrollProgressRef.current.style.transform = `scaleX(${progress})`;
       let currentSection = sections[0];
       let largestVisibleHeight = -1;
       for (const section of sections) {
@@ -472,14 +479,13 @@ export function PortfolioPage() {
               <Menu size={20} aria-hidden="true" /><span>Profile</span>
             </button>
             <div className="header-nav-wrap"><SectionNavigation activeSection={activeSection} /></div>
-            <span className="site-scroll-progress" style={{ width: `${scrollProgress}%` }} aria-hidden="true" />
+            <span className="site-scroll-progress" ref={scrollProgressRef} aria-hidden="true" />
           </header>
           <main id="main-content" tabIndex={-1} className="content-body portfolio-main">
             <motion.section id="about" variants={stagger} initial={false} animate="show" className="narrative-shell hero-section anchor-section">
               <div className="narrative-section hero-layout">
                 <div className="hero-copy">
                   <motion.div variants={fadeUp} className="space-y-3">
-                    <p className="hero-eyebrow">Portfolio / Aman Rakhade</p>
                     <h1 className="hero-title">{profile.name}</h1>
                     <p className="hero-role">{profile.title}</p>
                     <p className="hero-summary text-slate-300">{profile.heroSummary}</p>
