@@ -197,7 +197,7 @@ function SectionNavigation({
 }: {
   activeSection: string;
   variant?: "desktop" | "mobile";
-  onNavigate?: () => void;
+  onNavigate?: (href: string) => void;
 }) {
   const isMobile = variant === "mobile";
 
@@ -213,7 +213,7 @@ function SectionNavigation({
             href={item.href}
             aria-label={item.label}
             aria-current={isActive ? "location" : undefined}
-            onClick={onNavigate}
+            onClick={() => onNavigate?.(item.href)}
             whileTap={{ scale: 0.97 }}
             className={isMobile ? "mobile-menu-link" : "section-nav-link"}
           >
@@ -359,6 +359,9 @@ export function PortfolioPage() {
   const profileToggle = useRef<HTMLButtonElement>(null);
   const [copyStatus, setCopyStatus] = useState("");
   const [showMoreProjects, setShowMoreProjects] = useState(false);
+  const anchorNavigationRef = useRef<string | null>(null);
+  const anchorNavigationTimerRef = useRef<number | null>(null);
+  const anchorNavigationReleaseRef = useRef<(() => void) | null>(null);
   const [featuredProject, ...remainingProjects] = projects;
   const otherProjects = showMoreProjects ? remainingProjects : remainingProjects.slice(0, 2);
   const experienceItems: ExperienceItem[] = experiences.map((experience, index) => ({
@@ -369,6 +372,30 @@ export function PortfolioPage() {
     summary: experience.bullets[0] ?? "",
     bullets: experience.bullets.slice(1),
   }));
+
+  const beginAnchorNavigation = (href: string) => {
+    anchorNavigationReleaseRef.current?.();
+    anchorNavigationRef.current = href;
+    setActiveSection(href);
+    const releaseNavigation = () => {
+      if (anchorNavigationRef.current === href) anchorNavigationRef.current = null;
+      if (anchorNavigationTimerRef.current !== null) window.clearTimeout(anchorNavigationTimerRef.current);
+      anchorNavigationTimerRef.current = null;
+      window.removeEventListener("scrollend", releaseNavigation);
+      if (anchorNavigationReleaseRef.current === releaseNavigation) anchorNavigationReleaseRef.current = null;
+    };
+    anchorNavigationReleaseRef.current = releaseNavigation;
+    window.addEventListener("scrollend", releaseNavigation, { once: true });
+    anchorNavigationTimerRef.current = window.setTimeout(releaseNavigation, 3000);
+  };
+
+  const toggleProfile = () => {
+    const nextOpen = !profileOpen;
+    setProfileOpen(nextOpen);
+    if (nextOpen && window.innerWidth < 1100) {
+      window.requestAnimationFrame(() => window.scrollTo({ top: 0, behavior: "smooth" }));
+    }
+  };
 
   useEffect(() => {
     if (!profileOpen) return;
@@ -394,6 +421,14 @@ export function PortfolioPage() {
       const scrollable = document.documentElement.scrollHeight - viewportBottom;
       const progress = scrollable > 0 ? Math.min(1, Math.max(0, window.scrollY / scrollable)) : 0;
       if (scrollProgressRef.current) scrollProgressRef.current.style.transform = `scaleX(${progress})`;
+      const anchorTarget = anchorNavigationRef.current;
+      if (anchorTarget) {
+        setActiveSection(anchorTarget);
+        if (window.location.hash !== anchorTarget) {
+          window.history.replaceState(window.history.state, "", anchorTarget);
+        }
+        return;
+      }
       let currentSection = sections[0];
       let largestVisibleHeight = -1;
       for (const section of sections) {
@@ -473,6 +508,7 @@ export function PortfolioPage() {
       window.cancelAnimationFrame(frame);
       window.removeEventListener("scroll", scheduleUpdate);
       window.removeEventListener("resize", scheduleUpdate);
+      anchorNavigationReleaseRef.current?.();
     };
   }, []);
 
@@ -505,11 +541,11 @@ export function PortfolioPage() {
               aria-label={profileOpen ? "Close profile sidebar" : "Open profile"}
               aria-expanded={profileOpen}
               aria-controls="profile-sidebar"
-              onClick={(event) => { setProfileOpen(!profileOpen); if (event.detail > 0) event.currentTarget.blur(); }}
+              onClick={(event) => { toggleProfile(); if (event.detail > 0) event.currentTarget.blur(); }}
             >
               <Menu size={20} aria-hidden="true" /><span>Profile</span>
             </button>
-            <div className="header-nav-wrap"><SectionNavigation activeSection={activeSection} /></div>
+            <div className="header-nav-wrap"><SectionNavigation activeSection={activeSection} onNavigate={beginAnchorNavigation} /></div>
             <span className="site-scroll-progress" ref={scrollProgressRef} aria-hidden="true" />
           </header>
           <main id="main-content" tabIndex={-1} className="content-body portfolio-main">
@@ -525,7 +561,7 @@ export function PortfolioPage() {
                     <p className="hero-summary text-slate-300">{profile.heroSummary}</p>
                   </motion.div>
                   <motion.div variants={fadeUp} className="hero-actions">
-                    <motion.a href="#projects" className="hero-primary-button" whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
+                    <motion.a href="#projects" onClick={() => beginAnchorNavigation("#projects")} className="hero-primary-button" whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
                       View projects<ArrowRight className="h-4 w-4" />
                     </motion.a>
                     <a href={`${BASE}${profile.resume}`} download className="hero-secondary-button"><Download className="h-4 w-4" />Resume (PDF)</a>
@@ -559,7 +595,7 @@ export function PortfolioPage() {
                     </details>
                   </div>
                   <div className="flex flex-wrap gap-2">{featuredProject.stack.map((item) => <span key={item} className="stack-chip">{item}</span>)}</div>
-                  <a href="#contact" className="project-card-link">Discuss this project<ArrowUpRight className="h-4 w-4" /></a>
+                  <a href="#contact" onClick={() => beginAnchorNavigation("#contact")} className="project-card-link">Discuss this project<ArrowUpRight className="h-4 w-4" /></a>
                 </motion.article>
                 <motion.div variants={stagger} className="project-grid">
                   {otherProjects.map((project, index) => (
@@ -579,7 +615,7 @@ export function PortfolioPage() {
                         </div>
                       </details>
                       <div className="flex flex-wrap gap-2">{project.stack.map((item) => <span key={item} className="stack-chip stack-chip-sm">{item}</span>)}</div>
-                      <a href={project.href ?? "#contact"} target={project.href ? "_blank" : undefined} rel={project.href ? "noreferrer" : undefined} className="project-card-link" aria-label={`${project.href ? "View live project" : "Discuss project"}: ${project.title}`}>
+                      <a href={project.href ?? "#contact"} onClick={project.href ? undefined : () => beginAnchorNavigation("#contact")} target={project.href ? "_blank" : undefined} rel={project.href ? "noreferrer" : undefined} className="project-card-link" aria-label={`${project.href ? "View live project" : "Discuss project"}: ${project.title}`}>
                         <span>{project.href ? "View live project" : "Discuss this project"}</span><ArrowUpRight className="h-4 w-4" />
                       </a>
                     </motion.article>
