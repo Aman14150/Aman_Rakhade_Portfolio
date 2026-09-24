@@ -184,69 +184,71 @@ export const projects: ProjectEntry[] = [
   },
 ];
 
-export const skillGroups = [
+type Skill = { name: string; logo?: string; icon?: "scan"; mark?: string };
+type SkillOrbitBase = {
+  title: string;
+  tone: string;
+};
+type SkillOrbit = SkillOrbitBase & {
+  rings: { name: string; logo?: string; skills: Skill[] }[];
+};
+
+export const skillOrbits: SkillOrbit[] = [
   {
-    title: "AI and Data",
-    items: [
-      "Python",
-      "Azure OpenAI",
-      "Document Intelligence",
-      "Copilot",
-      "RAG",
-      "Agentic AI",
-      "Prompt Engineering",
-      "TensorFlow",
-      "PyTorch",
-      "Scikit-learn",
-      "NumPy",
-      "Pandas",
-      "Whisper",
+    title: "Cloud services",
+    tone: "cloud",
+    rings: [
+      { name: "Google Cloud", logo: "/skills/googlecloud.svg", skills: [
+        { name: "Vertex AI", logo: "/skills/cloud/vertex-ai.svg" },
+        { name: "Gemini API", logo: "/skills/cloud/gemini-api.svg" },
+        { name: "Document AI", logo: "/skills/cloud/document-ai.svg" },
+      ] },
+      { name: "AWS", logo: "/skills/amazonwebservices.svg", skills: [
+        { name: "Amazon Bedrock", logo: "/skills/cloud/amazon-bedrock.svg" },
+        { name: "SageMaker AI", logo: "/skills/cloud/sagemaker-ai.svg" },
+        { name: "Amazon Q", logo: "/skills/cloud/amazon-q.svg" },
+      ] },
+      { name: "Azure", logo: "/skills/microsoftazure.svg", skills: [
+        { name: "Content Understanding", icon: "scan" },
+        { name: "Azure OpenAI", logo: "/skills/cloud/azure-openai.svg" },
+        { name: "Azure AI Search", logo: "/skills/cloud/azure-ai-search.svg" },
+        { name: "Document Intelligence", logo: "/skills/cloud/document-intelligence.svg" },
+        { name: "Azure Functions", logo: "/skills/cloud/azure-functions.svg" },
+        { name: "Logic Apps", logo: "/skills/cloud/logic-apps.svg" },
+      ] },
     ],
   },
   {
-    title: "Frontend and Product",
-    items: [
-      "React",
-      "Next.js",
-      "TypeScript",
-      "JavaScript",
-      "Tailwind CSS",
-      "Responsive UI",
-      "Interaction Design",
-      "Dashboard Design",
-      "HTML",
-      "CSS",
-      "Bootstrap",
+    title: "Full stack",
+    tone: "sky",
+    rings: [
+      { name: "Databases", skills: [
+        { name: "MySQL", logo: "/skills/mysql.svg" },
+        { name: "MongoDB", logo: "/skills/mongodb.svg" },
+        { name: "PostgreSQL", logo: "/skills/postgresql.svg" },
+      ] },
+      { name: "Backend", skills: [
+        { name: "Python", logo: "/skills/python.svg" },
+        { name: "Java", logo: "/skills/java.svg" },
+        { name: "FastAPI", logo: "/skills/fastapi.svg" },
+        { name: "Node.js", logo: "/skills/nodejs.svg" },
+        { name: "Express.js", logo: "/skills/express.svg" },
+        { name: "Spring Boot", logo: "/skills/springboot.svg" },
+        { name: "REST APIs", mark: "API" },
+      ] },
+      { name: "Frontend", skills: [
+        { name: "React", logo: "/skills/react.svg" },
+        { name: "Next.js", logo: "/skills/nextdotjs.svg" },
+        { name: "TypeScript", logo: "/skills/typescript.svg" },
+        { name: "JavaScript", logo: "/skills/javascript.svg" },
+      ] },
     ],
-  },
-  {
-    title: "Backend and Databases",
-    items: [
-      "FastAPI",
-      "Node.js",
-      "Express",
-      "Spring Boot",
-      "Flask",
-      "REST APIs",
-      "MySQL",
-      "MongoDB",
-    ],
-  },
-  { title: "Cloud and Tools", items: ["Microsoft Azure", "Google Cloud", "AWS", "Git", "Postman", "VS Code"] },
-  {
-    title: "Google Cloud",
-    note: "Hands-on skill badges",
-    items: ["Vertex AI", "Gemini API", "Document AI", "BigQuery ML", "Cloud Run", "Cloud Storage", "Pub/Sub", "IAM", "Google Kubernetes Engine", "CI/CD"],
-  },
-  {
-    title: "AWS",
-    note: "Hands-on SimuLearn training",
-    items: ["Amazon Bedrock", "Amazon SageMaker", "Amazon Q", "Bedrock Guardrails", "RAG knowledge bases"],
   },
 ];
 
 export const certifications = [
   {
+    provider: "Microsoft",
     title: "Microsoft IQ Series: Foundry IQ",
     issuer: "Global AI Community",
     image: "/badge-foundry-iq.png",
@@ -255,6 +257,7 @@ export const certifications = [
     href: "https://globalai.community/badges/306ac6fa-4526-4a37-a727-5e64553d1aac",
   },
   {
+    provider: "AWS",
     title: "AWS SimuLearn - AI Practitioner",
     issuer: "Amazon Web Services",
     image: "/badge-aws-ai-practitioner.png",
@@ -263,18 +266,28 @@ export const certifications = [
     href: "https://www.credly.com/badges/88deee95-6ece-4366-993b-41cba656385d/public_url",
   },
   {
-    title: "Automate Data Capture at Scale with Document AI",
+    provider: "Google Cloud",
+    title: "Kickstarting Application Development with Gemini Code Assist",
     issuer: "Google Cloud",
-    date: "August 2026",
+    image: "/badge-gemini-code-assist.png",
+    date: "Aug 17, 2026",
     type: "Skill badge",
-    href: "https://www.credly.com/badges/2f89c735-46db-49d4-b7d4-2c2a188ec193",
+    href: "https://www.credly.com/badges/4e558851-c2cc-4b3c-8e48-da2c9ce06398",
+  },
+];
+
+export const certificationGroups = [
+  {
+    provider: "Microsoft",
+    skills: ["Azure AI Search", "RAG", "Document Intelligence", "Azure OpenAI"],
   },
   {
-    title: "Develop Serverless Applications on Cloud Run",
-    issuer: "Google Cloud",
-    date: "September 2026",
-    type: "Skill badge",
-    href: "https://www.credly.com/badges/ad6d2568-2b26-41a3-a08c-d6438ca5d10c",
+    provider: "AWS",
+    skills: ["Amazon Bedrock", "Amazon SageMaker", "Amazon Q", "Bedrock Guardrails"],
+  },
+  {
+    provider: "Google Cloud",
+    skills: ["Gemini Code Assist", "Debugging", "Cloud Functions", "API Gateway"],
   },
 ];
 

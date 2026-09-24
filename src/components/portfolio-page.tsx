@@ -32,13 +32,14 @@ import {
 } from "framer-motion";
 import {
   badgeCollectionUrl,
+  certificationGroups,
   certifications,
   experiences,
   navigation,
   profile,
   projects,
-  skillGroups,
 } from "@/data/portfolio";
+import { SkillsGalaxy } from "@/components/skills-galaxy";
 
 // Long sections must reveal as soon as they enter a small viewport.
 const viewport = { once: true, amount: 0.01 };
@@ -180,7 +181,7 @@ const compactNavLabels: Record<string, string> = {
   "#contact": "Contact",
 };
 
-type JourneyItem = {
+type ExperienceItem = {
   id: string;
   title: string;
   organization: string;
@@ -237,59 +238,38 @@ function SectionNavigation({
   );
 }
 
-function JourneyBlock({ items }: { items: JourneyItem[] }) {
+function ExperienceList({ items, activeId }: { items: ExperienceItem[]; activeId: string }) {
   return (
-    <div className="journey-block">
-      <div className="journey-track">
-        {items.map((item, index) => {
-          const isLeft = index % 2 === 0;
-
-          return (
-            <motion.article
-              key={item.id}
-              variants={fadeUp}
-              whileHover={{ y: -4 }}
-              className={`journey-row ${isLeft ? "journey-row-left" : "journey-row-right"}`}
-            >
-              <div className="journey-card-shell">
-                <div className="journey-card">
-                  <h3 className="text-xl font-semibold tracking-[-0.04em] text-white sm:text-2xl">
-                    {item.title}
-                  </h3>
-                  <p className="journey-card-org">{item.organization}</p>
-                  <p className="journey-card-period">{item.period}</p>
-                  <p className="journey-card-summary">{item.summary}</p>
-
-                  {item.bullets.length > 0 ? (
-                    <div className="journey-card-list">
-                      {item.bullets.map((bullet) => (
-                        <div key={`${item.id}-${bullet}`} className="journey-card-list-row">
-                          <span className="journey-card-list-dot" />
-                          <p>{bullet}</p>
-                        </div>
-                      ))}
-                    </div>
-                  ) : null}
-                </div>
+    <div className="experience-list">
+      {items.map((item) => (
+        <motion.article
+          key={item.id}
+          data-experience-id={item.id}
+          variants={fadeUp}
+          initial={false}
+          animate="show"
+          className={`experience-entry ${item.id === activeId ? "experience-entry-active" : ""}`}
+        >
+          <div className="experience-marker" aria-hidden="true"><BriefcaseBusiness className="h-4 w-4" /></div>
+          <div className="experience-card">
+            <div className="experience-card-heading">
+              <div>
+                <h3>{item.title}</h3>
+                <p className="experience-company">{item.organization}</p>
               </div>
-
-              <div className="journey-center">
-                <motion.div
-                  className="journey-badge"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true, amount: 0.5 }}
-                  transition={{ duration: 0.3, delay: index * 0.08 }}
-                >
-                  <BriefcaseBusiness className="h-4 w-4" />
-                </motion.div>
-              </div>
-
-              <div className="journey-spacer" />
-            </motion.article>
-          );
-        })}
-      </div>
+              <p className="experience-period">{item.period}</p>
+            </div>
+            <div className="experience-card-body">
+              <p className="experience-summary">{item.summary}</p>
+              {item.bullets.length > 0 && (
+                <ul className="experience-points">
+                  {item.bullets.map((bullet) => <li key={`${item.id}-${bullet}`}>{bullet}</li>)}
+                </ul>
+              )}
+            </div>
+          </div>
+        </motion.article>
+      ))}
     </div>
   );
 }
@@ -318,6 +298,7 @@ function ProfileCard({ compact = false }: { compact?: boolean }) {
 
           <div className={compact ? "identity-name-block sm:text-left" : "identity-name-block"}>
             <h2 className="identity-name text-white">{profile.name}</h2>
+            <p className="identity-role">{profile.title}</p>
           </div>
         </div>
       </div>
@@ -372,6 +353,7 @@ function ProfileCard({ compact = false }: { compact?: boolean }) {
 
 export function PortfolioPage() {
   const [activeSection, setActiveSection] = useState("#about");
+  const [activeExperienceId, setActiveExperienceId] = useState("experience-0");
   const scrollProgressRef = useRef<HTMLSpanElement>(null);
   const [profileOpen, setProfileOpen] = useState(false);
   const profileToggle = useRef<HTMLButtonElement>(null);
@@ -379,7 +361,7 @@ export function PortfolioPage() {
   const [showMoreProjects, setShowMoreProjects] = useState(false);
   const [featuredProject, ...remainingProjects] = projects;
   const otherProjects = showMoreProjects ? remainingProjects : remainingProjects.slice(0, 2);
-  const experienceJourney: JourneyItem[] = experiences.map((experience, index) => ({
+  const experienceItems: ExperienceItem[] = experiences.map((experience, index) => ({
     id: `experience-${index}`,
     title: experience.role,
     organization: experience.company,
@@ -454,6 +436,46 @@ export function PortfolioPage() {
     };
   }, []);
 
+  useEffect(() => {
+    const section = document.querySelector<HTMLElement>("#experience");
+    if (!section) return;
+    let frame = 0;
+    const updateActiveExperience = () => {
+      frame = 0;
+      const focusLine = window.innerHeight * 0.4;
+      const entries = Array.from(section.querySelectorAll<HTMLElement>(".experience-entry"))
+        .filter((entry) => entry.getBoundingClientRect().height > 0);
+      if (!entries.length) return;
+      const crossingEntry = entries.find((entry) => {
+        const rect = entry.getBoundingClientRect();
+        return rect.top <= focusLine && rect.bottom >= focusLine;
+      });
+      const closestEntry = crossingEntry ?? entries.reduce((closest, entry) => {
+        const entryRect = entry.getBoundingClientRect();
+        const closestRect = closest.getBoundingClientRect();
+        const entryDistance = Math.abs((entryRect.top + entryRect.bottom) / 2 - focusLine);
+        const closestDistance = Math.abs((closestRect.top + closestRect.bottom) / 2 - focusLine);
+        return entryDistance < closestDistance ? entry : closest;
+      });
+      const nextId = closestEntry.dataset.experienceId;
+      if (nextId) setActiveExperienceId((currentId) => currentId === nextId ? currentId : nextId);
+    };
+    const scheduleUpdate = () => {
+      if (!frame) frame = window.requestAnimationFrame(updateActiveExperience);
+    };
+    updateActiveExperience();
+    const observer = new ResizeObserver(scheduleUpdate);
+    observer.observe(section);
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
+    return () => {
+      observer.disconnect();
+      window.cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
+    };
+  }, []);
+
   return (
     <MotionConfig reducedMotion="user">
       <div className={`portfolio-scene ${profileOpen ? "profile-is-open" : ""}`}>
@@ -495,7 +517,10 @@ export function PortfolioPage() {
               <div className="narrative-section hero-layout">
                 <div className="hero-copy">
                   <motion.div variants={fadeUp} className="space-y-3">
-                    <h1 className="hero-title">{profile.name}</h1>
+                    <h1 className="hero-title" aria-label="Hello, I'm Aman Rakhade">
+                      <span className="hero-title-intro">Hello, I&apos;m</span>
+                      <span className="hero-title-name">Aman Rakhade</span>
+                    </h1>
                     <p className="hero-role">{profile.title}</p>
                     <p className="hero-summary text-slate-300">{profile.heroSummary}</p>
                   </motion.div>
@@ -567,62 +592,81 @@ export function PortfolioPage() {
             <motion.section id="experience" variants={stagger} initial="hidden" whileInView="show" viewport={viewport} className="narrative-shell anchor-section">
               <div className="narrative-section space-y-8 p-6 sm:p-10">
                 <motion.h2 variants={fadeUp} className="section-title text-white">Experience</motion.h2>
-                <JourneyBlock items={experienceJourney.slice(0, 2)} />
-                <details className="project-details"><summary>Earlier internships</summary><JourneyBlock items={experienceJourney.slice(2)} /></details>
+                <ExperienceList items={experienceItems.slice(0, 2)} activeId={activeExperienceId} />
+                <details className="project-details"><summary>Earlier internships</summary><ExperienceList items={experienceItems.slice(2)} activeId={activeExperienceId} /></details>
               </div>
             </motion.section>
 
             <motion.section id="skills" variants={stagger} initial="hidden" whileInView="show" viewport={viewport} className="narrative-shell anchor-section">
-              <div className="narrative-section space-y-8 p-6 sm:p-10">
+              <div className="narrative-section space-y-5 p-6 sm:p-8">
                 <motion.h2 variants={fadeUp} className="section-title text-white">Skills</motion.h2>
-                {skillGroups.map((group) => (
-                  <motion.div key={group.title} variants={fadeUp} className="skill-band">
-                    <div><h3 className="skill-band-title">{group.title}</h3>{group.note && <p className="mt-2 text-xs leading-5 text-slate-400">{group.note}</p>}</div>
-                    <div className="flex flex-wrap gap-2.5">{group.items.map((item) => <span key={item} className="stack-chip">{item}</span>)}</div>
-                  </motion.div>
-                ))}
+                <motion.div variants={fadeUp}><SkillsGalaxy /></motion.div>
               </div>
             </motion.section>
 
             <motion.section id="certifications" variants={stagger} initial="hidden" whileInView="show" viewport={viewport} className="narrative-shell anchor-section" aria-labelledby="certifications-heading">
               <div className="narrative-section space-y-8 p-6 sm:p-10">
                 <motion.h2 id="certifications-heading" variants={fadeUp} className="section-title text-white">Certifications &amp; Badges</motion.h2>
-                <div className="project-grid">
-                  {certifications.map((credential) => (
-                    <motion.article key={credential.title} variants={fadeUp} className="project-card">
-                      {credential.image ? (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img src={`${BASE}${credential.image}`} alt={`${credential.title} badge`} width={112} height={112} loading="lazy" decoding="async" className="h-28 w-28 object-contain" />
-                      ) : <Award className="h-6 w-6 text-orange-200" aria-hidden="true" />}
-                      <h3 className="text-xl font-semibold text-white">{credential.title}</h3>
-                      <p className="text-sm text-slate-300">{credential.issuer}</p>
-                      <p className="project-period">{credential.type} · {credential.date}</p>
-                      {credential.href && (
-                        <a href={credential.href} target="_blank" rel="noreferrer" className="project-card-link" aria-label={`View credential: ${credential.title}`}>
-                          View credential<ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-                        </a>
-                      )}
-                    </motion.article>
+                <div className="certification-grid">
+                  {certificationGroups.map((group) => (
+                    <article key={group.provider} className="certification-card">
+                      <h3 className="certification-provider">{group.provider}</h3>
+                      <div className="certification-credentials">
+                        {certifications.filter((credential) => credential.provider === group.provider).map((credential) => (
+                          <div key={credential.title} className="certification-credential">
+                            {credential.image ? (
+                              // eslint-disable-next-line @next/next/no-img-element
+                              <img src={`${BASE}${credential.image}`} alt={`${credential.title} badge`} width={96} height={96} loading="lazy" decoding="async" className="certification-image" />
+                            ) : <Award className="certification-placeholder" aria-hidden="true" />}
+                            <div className="certification-details">
+                              <h4>{credential.title}</h4>
+                              <p>{credential.type} · {credential.date}</p>
+                              <a href={credential.href} target="_blank" rel="noreferrer" className="project-card-link" aria-label={`View credential: ${credential.title}`}>
+                                View badge<ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                              </a>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                      <div className="certification-skills">
+                        <p>Related skills</p>
+                        <ul>{group.skills.map((skill) => <li key={skill}>{skill}</li>)}</ul>
+                      </div>
+                    </article>
                   ))}
                 </div>
-                <a href={badgeCollectionUrl} target="_blank" rel="noreferrer" className="hero-secondary-button">View all badges on Credly<ArrowUpRight className="h-4 w-4" aria-hidden="true" /></a>
+                <div className="certification-collection-row">
+                  <span>Explore the full badge collection</span>
+                  <a href={badgeCollectionUrl} target="_blank" rel="noreferrer" className="hero-secondary-button">View Credly profile<ArrowUpRight className="h-4 w-4" aria-hidden="true" /></a>
+                </div>
               </div>
             </motion.section>
 
             <motion.section id="contact" variants={stagger} initial="hidden" whileInView="show" viewport={viewport} className="narrative-shell anchor-section">
-              <div className="narrative-section space-y-6 p-6 sm:p-10">
-                <motion.h2 variants={fadeUp} className="section-title text-white">Get in touch</motion.h2>
-                <p className="text-slate-300">{profile.availability}</p>
-                <button type="button" className="hero-secondary-button" onClick={async () => {
-                  try { await navigator.clipboard.writeText(profile.email); setCopyStatus("Email copied."); }
-                  catch { setCopyStatus("Copy unavailable. Select the email address below to copy it manually."); }
-                }}>Copy email</button>
-                <p role="status" className="text-sm text-slate-300">{copyStatus}</p>
-                <div className="contact-links">
-                  <a href={`mailto:${profile.email}`} className="contact-row"><span>{profile.email}</span><Mail className="h-4 w-4" /></a>
-                  <a href={`tel:${profile.phone.replace(/\s/g, "")}`} className="contact-row"><span>{profile.phone}</span><Phone className="h-4 w-4" /></a>
-                  <a href={profile.linkedin} target="_blank" rel="noreferrer" className="contact-row"><span>LinkedIn</span><ArrowUpRight className="h-4 w-4" /></a>
-                  <a href={profile.github} target="_blank" rel="noreferrer" className="contact-row"><span>GitHub</span><ArrowUpRight className="h-4 w-4" /></a>
+              <div className="narrative-section contact-section p-6 sm:p-10">
+                <div className="contact-intro">
+                  <motion.h2 variants={fadeUp} className="section-title text-white">Get in touch</motion.h2>
+                  <p>{profile.availability}</p>
+                </div>
+                <div className="contact-layout">
+                  <div className="contact-feature">
+                    <span className="contact-feature-label"><Mail className="h-5 w-5" aria-hidden="true" /> Email</span>
+                    <a href={`mailto:${profile.email}`} className="contact-primary-link">
+                      <span>{profile.email}</span><ArrowUpRight className="h-6 w-6" aria-hidden="true" />
+                    </a>
+                    <div className="contact-feature-footer">
+                      <button type="button" className="contact-copy-button" onClick={async () => {
+                        try { await navigator.clipboard.writeText(profile.email); setCopyStatus("Email copied."); }
+                        catch { setCopyStatus("Copy unavailable. Select the email address above to copy it manually."); }
+                      }}>Copy email</button>
+                      <p role="status" className="contact-copy-status">{copyStatus}</p>
+                    </div>
+                  </div>
+                  <div className="contact-links">
+                    <a href={`tel:${profile.phone.replace(/\s/g, "")}`} className="contact-row"><span className="contact-link-icon"><Phone className="h-5 w-5" aria-hidden="true" /></span><span className="contact-link-copy"><small>Phone</small><strong>{profile.phone}</strong></span><ArrowUpRight className="h-4 w-4" aria-hidden="true" /></a>
+                    <a href={profile.linkedin} target="_blank" rel="noreferrer" className="contact-row"><span className="contact-link-icon"><LinkedinIcon className="h-5 w-5" /></span><span className="contact-link-copy"><strong>LinkedIn</strong></span><ArrowUpRight className="h-4 w-4" aria-hidden="true" /></a>
+                    <a href={profile.github} target="_blank" rel="noreferrer" className="contact-row"><span className="contact-link-icon"><GitHubIcon className="h-5 w-5" /></span><span className="contact-link-copy"><strong>GitHub</strong></span><ArrowUpRight className="h-4 w-4" aria-hidden="true" /></a>
+                  </div>
                 </div>
               </div>
             </motion.section>
