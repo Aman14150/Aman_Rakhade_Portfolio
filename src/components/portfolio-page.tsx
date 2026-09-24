@@ -5,7 +5,6 @@ import { useEffect, useRef, useState } from "react";
 const BASE = (process.env.NEXT_PUBLIC_BASE_PATH ?? "");
 
 import {
-  ArrowRight,
   ArrowUpRight,
   BriefcaseBusiness,
   Award,
@@ -561,10 +560,7 @@ export function PortfolioPage() {
                     <p className="hero-summary text-slate-300">{profile.heroSummary}</p>
                   </motion.div>
                   <motion.div variants={fadeUp} className="hero-actions">
-                    <motion.a href="#projects" onClick={() => beginAnchorNavigation("#projects")} className="hero-primary-button" whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
-                      View projects<ArrowRight className="h-4 w-4" />
-                    </motion.a>
-                    <a href={`${BASE}${profile.resume}`} download className="hero-secondary-button"><Download className="h-4 w-4" />Resume (PDF)</a>
+                    <a href={`${BASE}${profile.resume}`} download className="hero-secondary-button"><Download className="h-4 w-4" />Resume</a>
                     <span className="hero-social-pair">
                       <a href={profile.github} target="_blank" rel="noreferrer" className="identity-social-link" aria-label="GitHub profile"><GitHubIcon className="h-5 w-5" /></a>
                       <a href={profile.linkedin} target="_blank" rel="noreferrer" className="identity-social-link" aria-label="LinkedIn profile"><LinkedinIcon className="h-5 w-5" /></a>

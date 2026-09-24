@@ -1807,9 +1807,9 @@ a {
   .hero-title { font-size: clamp(1.9rem, 8vw, 2.5rem); }
   .hero-role { font-size: 0.92rem; }
   .hero-summary { font-size: 0.91rem; line-height: 1.5; }
-  .hero-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
-  .hero-actions .hero-primary-button, .hero-actions .hero-secondary-button { min-height: 2.75rem; width: 100%; padding: 0.5rem; font-size: 0.78rem; }
-  .hero-social-pair { justify-content: flex-start; grid-column: 1 / -1; }
+  .hero-actions { display: flex; gap: 0.5rem; }
+  .hero-actions .hero-primary-button, .hero-actions .hero-secondary-button { min-height: 2.75rem; width: auto; padding: 0.5rem 0.8rem; font-size: 0.78rem; }
+  .hero-social-pair { justify-content: flex-start; }
   .hero-social-pair .identity-social-link { width: 2.4rem; height: 2.4rem; }
   .hero-art { max-width: none; }
   .hero-illustration { transform: none; }
@@ -1913,7 +1913,7 @@ a {
   .skills-cloud-ring-title { display:grid; justify-items:center; gap:.3rem; color:rgb(var(--ring-color)); font-size:.7rem; line-height:1.2; text-align:center; }
   .skills-cloud-services { position:static; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.65rem .2rem; min-width:0; }
   .skills-cloud-satellite { position:static; width:auto; height:auto; offset-path:none; animation:none; }
-  .skills-stack-orbit::before { display:none; }
+  .skills-stack-orbit::before,.skills-stack-orbit::after { display:none; }
   .skills-stack-ring-title { display:grid; justify-items:center; gap:.25rem; color:rgb(var(--ring-color)); font-size:.68rem; font-weight:700; line-height:1.2; text-align:center; overflow-wrap:anywhere; }
   .skills-galaxy-rotator { position:static; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.65rem .2rem; min-width:0; }
   .skills-galaxy-satellite { position:static; width:auto; height:auto; offset-path:none; animation:none; }
