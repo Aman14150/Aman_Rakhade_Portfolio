@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "node -e \"console.log('\\n  \\x1b[36m-> Portfolio:\\x1b[0m  \\x1b[4mhttp://localhost:3000/Aman_Rakhade_Portfolio\\x1b[0m\\n')\" && next dev --webpack",
     "build": "next build",
     "start": "serve out",
     "preview": "npm run build && serve -s out -l 3000",
