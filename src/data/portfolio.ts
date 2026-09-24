@@ -263,7 +263,7 @@ export const certifications = [
     image: "/badge-aws-ai-practitioner.png",
     date: "July 2026",
     type: "Training badge",
-    href: "https://www.credly.com/badges/88deee95-6ece-4366-993b-41cba656385d/public_url",
+    href: "https://www.credly.com/badges/88deee95-6ece-4366-993b-41cba656385d",
   },
   {
     provider: "Google Cloud",
