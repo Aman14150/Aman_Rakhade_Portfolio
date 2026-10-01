@@ -6,7 +6,7 @@ import { skillOrbits } from "@/data/portfolio";
 
 const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
-type Skill = { name: string; logo?: string; icon?: "scan"; mark?: string };
+type Skill = { name: string; logo?: string; icon?: "scan"; mark?: string; description?: string };
 type Ring = { name: string; logo?: string };
 
 function RingMark({ ring }: { ring: Ring }) {
@@ -102,7 +102,19 @@ export function SkillsGalaxy() {
                     </div>
                   </div>
                 ))}
-                <div className="skills-cloud-core" aria-hidden="true"><Cloud size={22} /></div>
+                {group.core ? (
+                  <div
+                    className="skills-cloud-core"
+                    tabIndex={0}
+                    aria-label={`${group.core.name} — ${group.core.description}`}
+                  >
+                    <SkillIcon skill={group.core} />
+                    <span className="skills-cloud-core-label">
+                      <strong>{group.core.name}</strong>
+                      <small>{group.core.description}</small>
+                    </span>
+                  </div>
+                ) : null}
               </div>
             ) : <div className="skills-stack-stage">
               {group.rings.map((ring, ringIndex) => {

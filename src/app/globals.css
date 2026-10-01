@@ -1890,6 +1890,14 @@ a {
 .skills-galaxy-satellite:hover .skills-galaxy-satellite-name,.skills-galaxy-satellite:focus .skills-galaxy-satellite-name,.skills-cloud-satellite:hover .skills-galaxy-satellite-name,.skills-cloud-satellite:focus .skills-galaxy-satellite-name { opacity:1; transform:translate(-50%,0); }
 .skills-galaxy-satellite:focus-visible .skills-galaxy-logo,.skills-cloud-satellite:focus-visible .skills-galaxy-logo { outline:2px solid #8ee2f4; outline-offset:3px; }
 .skills-stack-core,.skills-cloud-core { position:absolute; top:50%; left:50%; z-index:1; display:grid; place-content:center; width:3.5rem; height:3.5rem; border-radius:50%; background:radial-gradient(circle at 40% 30%,rgb(var(--orbit-color)/.2),rgba(14,18,31,.94) 74%); box-shadow:0 0 26px rgb(var(--orbit-color)/.13); color:rgb(var(--orbit-color)); transform:translate(-50%,-50%); }
+.skills-cloud-core { z-index:4; width:4rem; height:4rem; cursor:default; }
+.skills-cloud-core .skills-galaxy-logo { border:0; background:transparent; box-shadow:none; }
+.skills-cloud-core .skills-galaxy-logo img { width:1.9rem; height:1.9rem; border-radius:0; }
+.skills-cloud-core-label { position:absolute; top:calc(100% + .45rem); left:50%; z-index:8; display:grid; width:max-content; max-width:10rem; gap:.05rem; padding:.3rem .5rem; border-radius:.4rem; background:#101827; color:#fff; line-height:1.2; text-align:center; opacity:0; pointer-events:none; transform:translate(-50%,.25rem); transition:opacity .15s ease,transform .15s ease; }
+.skills-cloud-core-label strong { font-size:.72rem; }
+.skills-cloud-core-label small { color:#b9c7d8; font-size:.58rem; }
+.skills-cloud-core:hover .skills-cloud-core-label,.skills-cloud-core:focus .skills-cloud-core-label { opacity:1; transform:translate(-50%,0); }
+.skills-cloud-core:focus-visible { outline:2px solid #8ee2f4; outline-offset:3px; }
 .skills-cloud-services { position:absolute; inset:0; }
 .skills-cloud-satellite { position:absolute; top:0; left:0; z-index:2; display:grid; justify-items:center; align-content:center; gap:.2rem; width:2.6rem; height:2.6rem; pointer-events:auto; offset-path:ellipse(var(--orbit-x) var(--orbit-y) at 50% 50%); offset-anchor:center; offset-rotate:0deg; animation:skills-cloud-travel var(--orbit-speed) linear infinite; animation-delay:var(--orbit-delay); }
 .skills-cloud-orbit-1 .skills-cloud-satellite { animation-direction:reverse; }
@@ -1909,7 +1917,13 @@ a {
   .skills-stack-orbit { position:relative; inset:auto; display:grid; grid-template-columns:5.2rem minmax(0,1fr); align-items:center; gap:.4rem; min-width:0; padding:.75rem .5rem; border-bottom:1px solid rgb(var(--ring-color)/.2); }
   .skills-cloud-stage { display:grid; gap:.65rem; width:100%; height:auto; animation:none; }
   .skills-cloud-orbit { position:relative; inset:auto; display:grid; grid-template-columns:5.2rem minmax(0,1fr); align-items:center; gap:.4rem; min-width:0; padding:.75rem .5rem; border-bottom:1px solid rgb(var(--ring-color)/.2); }
-  .skills-cloud-ring,.skills-cloud-core { display:none; }
+  .skills-cloud-ring { display:none; }
+  .skills-cloud-core { position:relative; top:auto; left:auto; order:-1; display:flex; align-items:center; justify-content:center; gap:.55rem; width:100%; height:auto; padding:.45rem; border-radius:0; background:none; box-shadow:none; transform:none; }
+  .skills-cloud-core .skills-galaxy-logo { width:2.2rem; height:2.2rem; }
+  .skills-cloud-core .skills-galaxy-logo img { width:1.55rem; height:1.55rem; }
+  .skills-cloud-core-label { position:static; width:auto; max-width:none; padding:0; background:none; text-align:left; opacity:1; transform:none; }
+  .skills-cloud-core-label strong { font-size:.7rem; }
+  .skills-cloud-core-label small { font-size:.58rem; }
   .skills-cloud-ring-title { display:grid; justify-items:center; gap:.3rem; color:rgb(var(--ring-color)); font-size:.7rem; line-height:1.2; text-align:center; }
   .skills-cloud-services { position:static; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.65rem .2rem; min-width:0; }
   .skills-cloud-satellite { position:static; width:auto; height:auto; offset-path:none; animation:none; }
@@ -1938,7 +1952,9 @@ a {
   .skills-galaxy-satellite { position:static; width:3rem; height:3rem; offset-path:none; animation:none; }
   .skills-cloud-stage { display:grid; gap:.7rem; width:100%; height:auto; animation:none; }
   .skills-cloud-orbit { position:relative; inset:auto; display:grid; grid-template-columns:5.2rem minmax(0,1fr); align-items:center; gap:.5rem; padding:.75rem; border-bottom:1px solid rgb(var(--ring-color)/.2); }
-  .skills-cloud-ring,.skills-cloud-core { display:none; }
+  .skills-cloud-ring { display:none; }
+  .skills-cloud-core { position:relative; top:auto; left:auto; order:-1; display:flex; align-items:center; justify-content:center; gap:.55rem; width:100%; height:auto; padding:.45rem; border-radius:0; background:none; box-shadow:none; transform:none; }
+  .skills-cloud-core-label { position:static; width:auto; max-width:none; padding:0; background:none; text-align:left; opacity:1; transform:none; }
   .skills-cloud-services { position:static; display:flex; flex-wrap:wrap; gap:.5rem; }
   .skills-cloud-satellite { position:static; width:auto; height:auto; offset-path:none; animation:none; }
 }

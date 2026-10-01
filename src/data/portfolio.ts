@@ -184,10 +184,11 @@ export const projects: ProjectEntry[] = [
   },
 ];
 
-type Skill = { name: string; logo?: string; icon?: "scan"; mark?: string };
+type Skill = { name: string; logo?: string; icon?: "scan"; mark?: string; description?: string };
 type SkillOrbitBase = {
   title: string;
   tone: string;
+  core?: Skill;
 };
 type SkillOrbit = SkillOrbitBase & {
   rings: { name: string; logo?: string; skills: Skill[] }[];
@@ -197,6 +198,11 @@ export const skillOrbits: SkillOrbit[] = [
   {
     title: "Cloud services",
     tone: "cloud",
+    core: {
+      name: "Terraform",
+      logo: "/skills/terraform.svg",
+      description: "Infrastructure as Code",
+    },
     rings: [
       { name: "Google Cloud", logo: "/skills/googlecloud.svg", skills: [
         { name: "Vertex AI", logo: "/skills/cloud/vertex-ai.svg" },
@@ -208,7 +214,7 @@ export const skillOrbits: SkillOrbit[] = [
         { name: "SageMaker AI", logo: "/skills/cloud/sagemaker-ai.svg" },
         { name: "Amazon Q", logo: "/skills/cloud/amazon-q.svg" },
       ] },
-      { name: "Azure", logo: "/skills/microsoftazure.svg", skills: [
+      { name: "Microsoft Azure", logo: "/skills/microsoftazure.svg", skills: [
         { name: "Content Understanding", icon: "scan" },
         { name: "Microsoft Foundry", logo: "/skills/cloud/microsoft-foundry.svg" },
         { name: "Azure OpenAI", logo: "/skills/cloud/azure-openai.svg" },
